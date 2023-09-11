@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fullpage 연습</title>
+
+    <link rel="stylesheet" href="fullpage.css" />
+    <!-- 제이쿼리 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link
+            type="text/css"
+            media="screen"
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+    />
+</head>
+
+<body>
+
+<div class="top-bar-section">
+    <div class="top-bar-container">
+    </div>
+</div>
+
+<div class="main-section">
+    <div class="main-box1">
+        <div style="border: 1px solid green ;margin-left : 20px"><input class="allCheckBox" type="checkBox">전체 선택</input>   </div>
+        <div  style="border: 1px solid green; margin-right:20px; "><button class = "delButton">삭제</button></div>
+    </div>
+    <div class="main-box2">
+       <div class="main-box2-title">
+           <div  class="main-box2-title-item1" style="border:1px solid blue">모델</div>
+           <div class="main-box2-title-item2" style="border:1px solid blue">견적 금액</div>
+           <div class="main-box2-title-item3" style="border:1px solid blue">견적일</div>
+       </div>
+
+<!--      견적 db 들어갈 공간 -->
+        <div   style="border:1px solid green" class="main-box2-body">
+            저장한 견적 내용이 없습니다.
+
+        </div>
+
+    </div>
+    <div class="main-box3">
+        <div class="text-item">
+            <div><h2>안내 사항</h2></div>
+            <div><span>견적서는 최대 3개월 까지 보관됩니다.</span></div>
+            <div> <span>견적서 비교는 승용 차종만 최대 4대 까지 비교 할 수 있습니다.</span></div>
+
+
+        </div>
+
+        </div>
+</div>
+
+
+</body>
+
+<style>
+    body {
+      font-family: 'Nanum Gothic'
+    }
+
+
+        .top-bar-section {
+     border:1px solid  red;
+     width : 100%;
+     height :100px;
+    }
+
+    .top-bar-container {
+         border : 1px solid orange;
+         width:1680px;
+         height:100px;
+         margin-left:auto;
+         margin-right:auto;
+    }
+
+        .main-section {
+        border:1px solid red;
+        width:1440px;
+        margin-left:auto;
+         margin-right:auto;
+         height: 1000px;
+
+
+        }
+
+        .main-section > div{
+        margin: 50px 0 ;
+
+        }
+
+        .main-box1 {
+        border:1px solid orange;
+     justify-content: space-between;
+         height: 50px;
+        display:flex;
+        font-size:20px;
+
+        }
+        .main-box1 {
+        line-height:43px;
+
+        }
+        .allCheckBox {
+
+
+        }
+
+
+        .delButton{
+
+            width:200px;
+            height: 50px;
+            background-color:gray;
+            color:white;
+
+        }
+
+
+
+        .main-box2 {
+        border:1px solid orange;
+
+         height: 400px;
+        color:#515250;
+
+
+        }
+
+        .main-box2-title{
+                width: 100%;
+                display:flex;
+                justify-content : space-around;
+                background-color:#e0e0dc;
+                font-size:50px;
+                 text-align:center;
+        }
+
+
+        .main-box2-title-item1 {
+                flex-grow:3;
+
+        }
+
+        .main-box2-title-item2 {
+        flex-grow:1;
+        }
+
+
+        .main-box2-title-item3 {
+        flex-grow:1;
+        }
+
+
+
+    .main-box3 {
+        border:1px solid orange;
+
+         height: 300px;
+         background-color:#e0e0dc;
+        }
+
+
+     .text-item {
+        border :1px solid green;
+        margin:60px;
+        font-size:25px;
+        }
+</style>
