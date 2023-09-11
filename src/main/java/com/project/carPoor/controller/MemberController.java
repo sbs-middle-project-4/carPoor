@@ -87,7 +87,12 @@ public class MemberController {
                 .subject("[carPoor] 회원가입 이메일 인증")
                 .build();
 
-        member.setAuthKey(emailService.sendMail(emailMessage, "email")); // authkey 생성, 인증 이메일 발송요청(해당 html 파일 전달), authkey 저장
+        try { // 전송할 수 없는 이메일 입력시 exception 터짐
+            member.setAuthKey(emailService.sendMail(emailMessage, "email")); // authkey 생성, 인증 이메일 발송요청(해당 html 파일 전달), authkey 저장
+        } catch (Exception e) {
+            return "/member/signupAlter";
+        } 
+        
         member.setJoinStatus(false); // 인증 전
 
         this.memberService.createMember(member);
