@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Random;
 
 @Service
