@@ -1,5 +1,6 @@
 package com.project.carPoor.controller;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.project.carPoor.service.EmailService;
 import com.project.carPoor.domain.EmailMessage;
 import com.project.carPoor.domain.Member;
@@ -8,7 +9,9 @@ import com.project.carPoor.validator.CheckEmailValidator;
 import com.project.carPoor.validator.CheckLoginIdValidateor;
 import com.project.carPoor.validator.CheckPasswordValidator;
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -117,6 +120,50 @@ public class MemberController {
 
         return "/member/emailAlert";
     }
+
+    @GetMapping("showMemberInfo")
+    public String show() {
+
+        return "/member/showMemberInfo";
+    }
+
+
+    // 회원정보 수정 로직 시작
+
+    @PostMapping("/processInput") // 비동기로 데이터 받기 엔드포인트
+    @ResponseBody // 비동기 데이터 전송
+    public MyResponse processInput(@RequestBody MyRequest request) {
+
+        String userInput = request.getUserInput(); // 웹에서 받은 데이터 변수에 저장
+
+        MyResponse response = new MyResponse(); // 웹으로 데이터 보낼 객체 생성
+
+
+        // 유효성 검사 로직 - 여기에 현재 로그인 한 멤버 객체를 받아서 비밀번호 일치여부 확인
+
+        if (userInput.equals("qqq")) {
+            // 통과한 경우
+            response.setPassed(true);
+        } else {
+            // 실패한 경우
+            response.setPassed(false);
+        }
+
+        // 유효성 검사 로직 끝
+
+
+        return response; // 객체전송 json 타입임
+    }
+
+    @GetMapping("modifyMemberInfo")
+    public String member2() {
+        return "/member/modifyMemberInfo";
+    }
+
+
+
+    // 회원정보 수정 로직 끝
+
 
 
 
