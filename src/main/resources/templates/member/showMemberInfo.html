@@ -8,7 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js
 </head>
 <header>
     <div class="container    w-[1920px] h-[100px] mr-auto ml-auto flex" >
@@ -41,7 +40,7 @@
 
         <div class="welcome    h-22 w-44 mt-12 mb-5">
             <span class="text-3xl">MY PAGE</span>
-            <div class="inline-block text-blue-300 text-3xl">ㅂㅂㅂ</div> <span class="text-3xl">님</span>
+            <div class="inline-block text-blue-300 text-3xl" th:text="${member.name}"></div> <span class="text-3xl">님</span>
         </div>
 
 
@@ -87,19 +86,19 @@
             <span class="block   font-bold text-3xl w-64 h-12 ml-12 mb-5">회원 정보</span>
             <div class="   flex flex-row pl-12 h-12 mb-5">
                 <label class="  block w-28 h-12 font-bold flex items-center justify-left"> 아이디 </label>
-                <div class="    w-full h-12 ml-24 font-bold flex items-center" > 4조qweqweqweqweqwe </div>
+                <div class="    w-full h-12 ml-24 font-bold flex items-center" th:text="${member.loginId}">  </div>
             </div>
             <div class="   flex flex-row pl-12 h-12 mb-5">
                 <label class=" block w-28 h-12 font-bold flex items-center justify-left"> 이름 </label>
-                <div class="    w-full h-12 ml-24 font-bold flex items-center" > 4조 </div>
+                <div class="    w-full h-12 ml-24 font-bold flex items-center" th:text="${member.name}">  </div>
             </div>
             <div class="   flex flex-row pl-12 h-12 mb-5">
                 <label class=" block w-28 h-12 font-bold flex items-center justify-left"> Email </label>
-                <div class="   w-full h-12 ml-24 font-bold flex items-center" > 4조 </div>
+                <div class="   w-full h-12 ml-24 font-bold flex items-center" th:text="${member.email}" >  </div>
             </div>
             <div class="   flex flex-row pl-12 h-12 mb-5">
                 <label class=" block w-28 h-12 font-bold flex items-center justify-left"> 전화번호 </label>
-                <div class="   w-full h-12 ml-24 font-bold flex items-center" > 4조 </div>
+                <div class="   w-full h-12 ml-24 font-bold flex items-center" th:text="${member.phoneNumber}" >  </div>
             </div>
             <span class="block  w-32 h-12 ml-auto mr-12 mb-5">
                     <button class="btn btn-neutral hover:bg-purple-700" onclick="toggleEditUserInfoDiv()">회원정보 수정</button>
@@ -134,7 +133,7 @@
         <h2 class="card-title">회원정보 수정</h2>
         <p>회원정보 수정을 위해 현재 비밀번호를 입력해주세요</p>
         <form id="myForm">
-            <input type="text" id="userInput" placeholder="현재 비밀번호 입력" class="input input-bordered input-info w-[380px] " />
+            <input type="password" id="userInput" placeholder="현재 비밀번호 입력" class="input input-bordered input-info w-[380px] " />
         </form>
         <div class="card-actions justify-end justify-center mt-5">
             <button class="btn btn-primary" onclick="toggleEditUserInfoDiv(); sendData();">확인</button>
@@ -184,6 +183,7 @@
             } else {
                 // 실패한 경우 경고 메시지 출력 등 필요한 동작 수행
                 alert("비밀번호가 일치하지 않습니다.");
+                window.location.reload();
             }
         },
         error: function () {

@@ -12,6 +12,8 @@ import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Map;
 
 @Controller
@@ -33,6 +36,8 @@ public class MemberController {
     private final CheckLoginIdValidateor checkLoginIdValidateor;
     private final CheckPasswordValidator checkPasswordValidator;
     private final EmailService emailService;
+
+    private Member member;
 
     @InitBinder // Controller 내 Binding, 검증 절차 설정
     public void validatorBinder(WebDataBinder binder) {
@@ -122,7 +127,15 @@ public class MemberController {
     }
 
     @GetMapping("showMemberInfo")
-    public String show() {
+    public String show(Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        Member member = this.memberService.getMemberByLoginId(authentication.getName());
+
+        this.member = member;
+
+        model.addAttribute("member", member);
 
         return "/member/showMemberInfo";
     }
@@ -141,7 +154,7 @@ public class MemberController {
 
         // 유효성 검사 로직 - 여기에 현재 로그인 한 멤버 객체를 받아서 비밀번호 일치여부 확인
 
-        if (userInput.equals("qqq")) {
+        if (passwordEncoder.matches(userInput, this.member.getPassword())) {
             // 통과한 경우
             response.setPassed(true);
         } else {
@@ -156,8 +169,28 @@ public class MemberController {
     }
 
     @GetMapping("modifyMemberInfo")
-    public String member2() {
+    public String member2(Model model) {
+        model.addAttribute("member", this.member);
         return "/member/modifyMemberInfo";
+    }
+
+    @Transactional
+    @PostMapping("modify")
+    public String doMemberModify(Model model, ModifyForm modifyForm) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        Member member = this.memberService.getMemberByLoginId(authentication.getName());
+
+        member.setName(modifyForm.getName());
+        member.setPhoneNumber(modifyForm.getPhoneNumber());
+        member.setPassword(passwordEncoder.encode(modifyForm.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        model.addAttribute("Message", "회원 정보가 수정되었습니다.");
+
+        return "/member/modifyAlert";
     }
 
 
