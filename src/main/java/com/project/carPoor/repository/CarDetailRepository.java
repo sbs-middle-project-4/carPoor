@@ -3,16 +3,51 @@ package com.project.carPoor.repository;
 
 import com.project.carPoor.domain.CarDetail;
 import com.project.carPoor.domain.CarDetail2;
+import jakarta.persistence.EntityManager;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface CarDetailRepository {
 
-    List<CarDetail> getColor();
-    List<CarDetail2> getColor2();
+@Repository
 
-    List<CarDetail> getCarDetailByColorId(List<Integer> id);
+public class CarDetailRepository {
 
 
-    List<CarDetail2> getCarDetail2ByColorId(List<Integer> id);
+
+    private EntityManager em;
+
+//    public JpaCarDetailRepository(EntityManager em) {
+//        this.em = em;
+//    }
+
+    public List<CarDetail> getColor() {
+        return em.createQuery("select c from CarDetail c", CarDetail.class)
+                .getResultList();
+    }
+
+    public List<CarDetail2> getColor2() {
+        return em.createQuery("select d from CarDetail2 d", CarDetail2.class)
+                .getResultList();
+    }
+
+    public List<CarDetail> getCarDetailByColorId(List<Integer> id) {
+        return em.createNativeQuery(
+                        "SELECT * FROM CarDetail  WHERE CarDetail.id in :id",
+                        CarDetail.class
+                )
+                .setParameter("id", id)
+                .getResultList();
+    }
+
+    public List<CarDetail2> getCarDetail2ByColorId(List<Integer> id) {
+        return em.createNativeQuery(
+                        "SELECT * FROM CarDetail2  WHERE CarDetail2.id in :id",
+                        CarDetail2.class
+                )
+                .setParameter("id", id)
+                .getResultList();
+    }
 }
