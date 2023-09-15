@@ -57,66 +57,8 @@
     <!-- fp-auto-height 화면높이만큼 다음페이지 살짝나옴 -->
     <!-- 2 -->
 
-    <div class="section section-2">
-        <div>옵션</div>
-        <div class="option-section">
-            <!--          이미지 넣을 공간-->
-            <div class="img-section">
+    <div class="section section-2 ">
 
-                <div class="img-container">
-
-                    <div><h2 style="font-size:60px; margin-top:80px; margin-bottom:10px;">디 올 뉴 싼타페 - 프레스티지</h2></div>
-                    <div class="price-text" style="font-size : 40px; "> <span style="font-size:20px;     font-weight: bold;">총 차량 가격 </span> <span id="money" style="font-size:50px;    font-weight: bold;">35460000</span><span class="option-price" id="money2" style="display:none;" >35460000</span> <span style="font-size:50px;    font-weight: bold;">원</span>  </div>
-
-                    <img class="img-item1" src="https://www.hyundai.com/contents/spec/MX5/phone.jpg" alt="">
-
-                    <div class="information-box">
-                        <span class="information-text">스마트폰 2대를 별도의 케이블 없이 고속 충전할 수 있는 듀얼 무선 충전 시스템이 적용되어 사용성을 높였습니다.</span>
-                    </div>
-                </div>
-            </div>
-
-            <!--           옵션 선택 넣을 공간-->
-            <div class="select-section">
-
-
-                <div class="option-container">
-                    <h2 style="margin-top:100px; margin-bottom:20px; margin-left:40px">옵션</h2>
-                    <div class="scrollable-container">
-                        <div class="option-box" >
-                            <div  id="box" class="option-item"  th:each="carOption : ${carOption}" th:id="${carOption.id}">
-                                <a >
-                                    <img class="option-box-img" th:src="${carOption.imgUrl}" th:alt="${carOption.name}" th:data-img-url="${carOption.imgUrl}"  th:information-text="${carOption.information}">
-                                </a>
-                                <div  class="check"  type="optionId" th:optionId="${carOption.id}" onclick="doCheck(this)"  th:value="${carOption.price}+이용균입니다." >
-                                    <a href="#" >
-                                        <input class="checkbox" type="checkbox" th:name="optionId" th:value="${carOption.id}" >
-                                        <div th:text="${carOption.name}"></div>
-                                        <div class="price2" style="display:inline-block; " th:text="${carOption.price}+원"><span>원</span></div><span>원</span>
-
-                                        <div class="price" style="display:none;" th:text="${carOption.price}"></div>
-                                        <br>
-                                        <input class="radio" type="radio"  >
-                                    </a>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-
-
-
-    </div>
-
-    <!-- 3 -->
-    <div class="section section-3">
 
         <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0;">
 
@@ -131,7 +73,7 @@
 
             <div id="content1" >
                 <div class="bgImg">
-<!--            서버에 outImgUrl 보내주기 위한 장치      -->
+                    <!--            서버에 outImgUrl 보내주기 위한 장치      -->
                     <input class="dbGoOutImg" type="text" style="display:none;" name="outImgUrl" value="https://www.hyundai.com/contents/vr360/MX03/exterior/WW2/001.png">
                     <img class="carImg cc" src="https://www.hyundai.com/contents/vr360/MX03/exterior/WW2/001.png" alt="">
                 </div>
@@ -153,7 +95,7 @@
 
             <div id="content2" >
                 <div class="bgImg">
-<!--                   inImgUrl를 보내주기 위해있는 장치-->
+                    <!--                   inImgUrl를 보내주기 위해있는 장치-->
                     <input class="dbGoInImg" type="text" style="display:none;" name="inImgUrl" value="https://www.hyundai.com/contents/vr360/MX03/interior/3NB/img-interior.png">
 
                     <img class="carImg ccc" src="https://www.hyundai.com/contents/vr360/MX03/interior/3NB/img-interior.png" alt="">
@@ -175,13 +117,74 @@
 
             </div>
             <input type="hidden" value="35460000" name="wholePrice" />
-            <button class="btn-submit" type="submit" style="margin-top:20px;" value="" name="wholePrice" >차 등록</button>
-
-
         </div>
 
     </div>
 
+    <!-- 3 -->
+    <div class="section section-3 fp-scrollable">
+
+
+
+
+
+        <div class="option-section">
+            <!--          이미지 넣을 공간-->
+            <div class="img-section">
+
+                <div class="img-container">
+
+                    <div><h2 style="font-size:60px; margin-top:20px; margin-bottom:10px;">디 올 뉴 싼타페 - 프레스티지</h2></div>
+                    <div class="price-text" style="font-size : 40px; "> <span style="font-size:20px;     font-weight: bold;">총 차량 가격 </span> <span id="money" style="font-size:50px;    font-weight: bold;">35460000</span><span class="option-price" id="money2" style="display:none;" >35460000</span> <span style="font-size:50px;    font-weight: bold;">원</span>  </div>
+
+                    <img class="img-item1" src="https://www.hyundai.com/contents/spec/MX5/phone.jpg" alt="">
+
+                    <div class="information-box">
+                        <span class="information-text">스마트폰 2대를 별도의 케이블 없이 고속 충전할 수 있는 듀얼 무선 충전 시스템이 적용되어 사용성을 높였습니다.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!--           옵션 선택 넣을 공간-->
+            <div class="select-section">
+
+
+                <div class="option-container">
+                    <h2  style="margin-bottom:20px; margin-left:40px">옵션</h2>
+                    <div class="scrollable-container">
+                        <div class="option-box" >
+                            <div  id="box" class="option-item"  th:each="carOption : ${carOption}" th:id="${carOption.id}">
+                                <a >
+                                    <img class="option-box-img" th:src="${carOption.imgUrl}" th:alt="${carOption.name}" th:data-img-url="${carOption.imgUrl}"  th:information-text="${carOption.information}">
+                                </a>
+                                <div  class="check"  type="optionId" th:optionId="${carOption.id}" onclick="doCheck(this)"  th:value="${carOption.price}+이용균입니다." >
+                                    <a href="#" >
+                                        <input class="checkbox" type="checkbox" th:name="optionId" th:value="${carOption.id}" >
+                                        <div th:text="${carOption.name}"></div>
+                                        <div class="price2" style="display:inline-block; " th:text="${carOption.price}+원"><span>원</span></div><span>원</span>
+
+                                        <div class="price" style="display:none;" th:text="${carOption.price}"></div>
+                                        <br>
+                                        <!--                                        <input class="radio" type="radio"  >-->
+                                    </a>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <button class="btn-submit" type="submit" style="margin-top:20px;" value="" name="wholePrice" >차 등록</button>
+
+
+
+
+
+    </div>
     <!-- 4 -->
     <div class="section section-4">
         <a href="#section1"
@@ -194,9 +197,7 @@
 
         <input type="hidden" value="" name="wholePrice" />
 
-</div>
-
-
+    </div>
 </form>
 </body>
 </html>

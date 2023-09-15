@@ -106,7 +106,8 @@ public class CarController {
         System.out.println(member.getId()+"멤버의 id");
         List<SelectOption> selectOptions = carService.getSelectOptionList(member.getId());
         System.out.println(selectOptions.get(0).getCreateDate()+"옵션 생성날짜 id");
-
+        System.out.println(selectOptions.get(1).getOutColorId());
+        System.out.println(selectOptions.get(2).getOutColorId());
 
         List<Integer> colorIds = new ArrayList<>();
 

@@ -17,3 +17,11 @@ loopBottom: true,
 //첫번째 페이지 스크롤하면 마지막페이지로 이동
 loopTop: true,
 });
+
+
+new fullpage('#fullpage', {
+  // 다른 FullPage.js 옵션들 설정
+
+  // scrollOverflow 옵션 활성화
+  scrollOverflow: true,
+});
