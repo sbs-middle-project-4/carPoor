@@ -1,5 +1,6 @@
 package com.project.carPoor.controller;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.project.carPoor.service.EmailService;
 import com.project.carPoor.domain.EmailMessage;
 import com.project.carPoor.domain.Member;
@@ -8,7 +9,11 @@ import com.project.carPoor.validator.CheckEmailValidator;
 import com.project.carPoor.validator.CheckLoginIdValidateor;
 import com.project.carPoor.validator.CheckPasswordValidator;
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +22,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Map;
 
 @Controller
@@ -30,6 +36,8 @@ public class MemberController {
     private final CheckLoginIdValidateor checkLoginIdValidateor;
     private final CheckPasswordValidator checkPasswordValidator;
     private final EmailService emailService;
+
+    private Member member;
 
     @InitBinder // Controller 내 Binding, 검증 절차 설정
     public void validatorBinder(WebDataBinder binder) {
@@ -87,7 +95,12 @@ public class MemberController {
                 .subject("[carPoor] 회원가입 이메일 인증")
                 .build();
 
-        member.setAuthKey(emailService.sendMail(emailMessage, "email")); // authkey 생성, 인증 이메일 발송요청(해당 html 파일 전달), authkey 저장
+        try { // 전송할 수 없는 이메일 입력시 exception 터짐
+            member.setAuthKey(emailService.sendMail(emailMessage, "email")); // authkey 생성, 인증 이메일 발송요청(해당 html 파일 전달), authkey 저장
+        } catch (Exception e) {
+            return "/member/signupAlter";
+        } 
+        
         member.setJoinStatus(false); // 인증 전
 
         this.memberService.createMember(member);
@@ -112,6 +125,78 @@ public class MemberController {
 
         return "/member/emailAlert";
     }
+
+    @GetMapping("showMemberInfo")
+    public String show(Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        Member member = this.memberService.getMemberByLoginId(authentication.getName());
+
+        this.member = member;
+
+        model.addAttribute("member", member);
+
+        return "/member/showMemberInfo";
+    }
+
+
+    // 회원정보 수정 로직 시작
+
+    @PostMapping("/processInput") // 비동기로 데이터 받기 엔드포인트
+    @ResponseBody // 비동기 데이터 전송
+    public MyResponse processInput(@RequestBody MyRequest request) {
+
+        String userInput = request.getUserInput(); // 웹에서 받은 데이터 변수에 저장
+
+        MyResponse response = new MyResponse(); // 웹으로 데이터 보낼 객체 생성
+
+
+        // 유효성 검사 로직 - 여기에 현재 로그인 한 멤버 객체를 받아서 비밀번호 일치여부 확인
+
+        if (passwordEncoder.matches(userInput, this.member.getPassword())) {
+            // 통과한 경우
+            response.setPassed(true);
+        } else {
+            // 실패한 경우
+            response.setPassed(false);
+        }
+
+        // 유효성 검사 로직 끝
+
+
+        return response; // 객체전송 json 타입임
+    }
+
+    @GetMapping("modifyMemberInfo")
+    public String member2(Model model) {
+        model.addAttribute("member", this.member);
+        return "/member/modifyMemberInfo";
+    }
+
+    @Transactional
+    @PostMapping("modify")
+    public String doMemberModify(Model model, ModifyForm modifyForm) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        Member member = this.memberService.getMemberByLoginId(authentication.getName());
+
+        member.setName(modifyForm.getName());
+        member.setPhoneNumber(modifyForm.getPhoneNumber());
+        member.setPassword(passwordEncoder.encode(modifyForm.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        model.addAttribute("Message", "회원 정보가 수정되었습니다.");
+
+        return "/member/modifyAlert";
+    }
+
+
+
+    // 회원정보 수정 로직 끝
+
 
 
 

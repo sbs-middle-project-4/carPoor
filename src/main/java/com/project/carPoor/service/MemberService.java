@@ -46,4 +46,17 @@ public class MemberService {
 
         return oMember.orElse(null);
     }
+
+    public Member getMemberByLoginId(String loginId) {
+
+        Optional<Member> LoginId = this.memberRepository.findByLoginId(loginId);
+
+        if(LoginId.isPresent()) {
+            return LoginId.get();
+        } else {
+            throw new RuntimeException("회원정보 없음");
+        }
+
+    }
+
 }
