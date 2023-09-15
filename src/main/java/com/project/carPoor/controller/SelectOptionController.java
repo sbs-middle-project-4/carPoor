@@ -1,7 +1,9 @@
 package com.project.carPoor.controller;
 
+import com.project.carPoor.domain.Member;
 import com.project.carPoor.domain.SelectOption;
 import com.project.carPoor.service.CarService;
+import com.project.carPoor.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -16,16 +19,25 @@ import java.util.List;
 public class SelectOptionController {
 
     private final CarService carService;
-    private final List<SelectOption> selectOptions;
+    private  List<SelectOption> selectOptions;
+    private  Member member;
+    private final MemberService memberService;
     @PostMapping("/createSelectOption")
     @GetMapping
-    public String result(Model model,SelectForm selectForm, @Valid SelectOption selectOption ) {
+    public String result(Model model, SelectForm selectForm, @Valid SelectOption selectOption,
+                         Principal principal) {
         System.out.println("옵션만들기 1차 ");
 
+        Member member = memberService.getMemberByLoginId(principal.getName());
 
 
-        carService.create(selectOption.getUserId(),selectOption.getInColorId(),
-                selectOption.getOptionId(),selectOption.getOutColorId(), selectOption.getWholePrice(),selectOption.getOutImgUrl(),selectOption.getInImgUrl());
+
+
+
+        carService.create(selectOption.getInColorId(),
+                selectOption.getOptionId(),selectOption.getOutColorId(),
+                selectOption.getWholePrice(),selectOption.getOutImgUrl(),
+                selectOption.getInImgUrl(),member.getId());
         System.out.println("차 옵션 만드는거 2차 실행부분");
 
 

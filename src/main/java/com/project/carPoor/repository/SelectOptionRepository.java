@@ -30,12 +30,12 @@ public class SelectOptionRepository  {
 
 
     @Transactional
-    public SelectOption create(Integer userId, Integer inColorId, List<Integer> optionId, Integer outColorId,
-                               Integer wholePrice, String outImgUrl, String inImgUrl) {
+    public SelectOption create(Integer inColorId, List<Integer> optionId, Integer outColorId,
+                               Integer wholePrice, String outImgUrl, String inImgUrl, Long userId) {
         SelectOption user = new SelectOption();
         String dateFormat = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 
-        user.setUserId(userId);
+
         user.setInColorId(inColorId);
         user.setOutColorId(outColorId);
         user.setOptionId(optionId);
@@ -44,16 +44,17 @@ public class SelectOptionRepository  {
         user.setCreateDate(dateFormat);
         user.setOutImgUrl(outImgUrl);
         user.setInImgUrl(inImgUrl);
-
+        user.setUserId(userId);
         em.persist(user); // 데이터베이스에 저장
 
         return user;
     }
 
 
-    public List<SelectOption> findAll() {
+    public List<SelectOption> findAll(Long id) {
         // EntityManager를 사용하여 적절한 JPQL 또는 Criteria API 쿼리를 작성하여 데이터를 가져옵니다.
-        return em.createQuery("SELECT s FROM SelectOption s", SelectOption.class)
+        return em.createQuery("SELECT s FROM SelectOption s WHERE s.userId = :id", SelectOption.class)
+                .setParameter("id", id)
                 .getResultList();
 
 
