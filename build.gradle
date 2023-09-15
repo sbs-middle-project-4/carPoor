@@ -45,9 +45,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
 
-//	옮겨온 의존성
-	implementation 'jakarta.platform:jakarta.jakartaee-api:9.1.0'
-	implementation 'jakarta.validation:jakarta.validation-api:3.0.0'
+
 
 
 }

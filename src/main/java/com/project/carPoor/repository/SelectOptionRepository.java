@@ -3,6 +3,7 @@ package com.project.carPoor.repository;
 import com.project.carPoor.domain.SelectOption;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -27,6 +28,8 @@ public class SelectOptionRepository  {
 
     }
 
+
+    @Transactional
     public SelectOption create(Integer userId, Integer inColorId, List<Integer> optionId, Integer outColorId,
                                Integer wholePrice, String outImgUrl, String inImgUrl) {
         SelectOption user = new SelectOption();
@@ -52,6 +55,8 @@ public class SelectOptionRepository  {
         // EntityManager를 사용하여 적절한 JPQL 또는 Criteria API 쿼리를 작성하여 데이터를 가져옵니다.
         return em.createQuery("SELECT s FROM SelectOption s", SelectOption.class)
                 .getResultList();
+
+
     }
 
 
@@ -69,7 +74,7 @@ public class SelectOptionRepository  {
 
     public List<SelectOption> findBySelectOptionId(@Param("id") Integer id){
 
-        return em.createNativeQuery("SELECT s FROM SelectOption s WHERE s.id = :id")
+        return em.createQuery("SELECT s FROM SelectOption  s WHERE s.id = :id")
 
                 .setParameter("id",id)
                 .getResultList();
@@ -80,7 +85,7 @@ public class SelectOptionRepository  {
 
     public List<SelectOption> getLastSelectOption(){
 
-        return em.createNativeQuery("SELECT s FROM SelectOption s ORDER BY s.id DESC LIMIT 1")
+        return em.createNativeQuery("SELECT * FROM select_option ORDER BY id DESC LIMIT 1")
 
 
                 .getResultList();
