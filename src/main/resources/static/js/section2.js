@@ -1,3 +1,19 @@
+
+                            var ch1 = $("input");
+                            console.log(ch1+"ch1");
+                            ch1.prop("checked", false);
+
+
+
+                    window.onpageshow = function(event) {
+                           if (event.persisted) {
+                               // 페이지가 뒤로 가기로 돌아올 때 체크 박스 초기화
+                               var ch2 = $("input");
+                               console.log(ch2+"ch2");
+                               ch2.prop("checked", false);
+                           }
+                   };
+
                 var optionPrice=null;
                 $(document).ready(function() {
 
