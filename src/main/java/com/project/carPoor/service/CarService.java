@@ -1,8 +1,9 @@
 package com.project.carPoor.service;
 
-import com.project.carPoor.domain.Car;
-import com.project.carPoor.repository.CarRepository;
+import com.project.carPoor.domain.*;
+import com.project.carPoor.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +14,78 @@ public class CarService {
 
     private final CarRepository carRepository;
 
+    private final OptionRepository optionRepository;
+    private final CarDetailRepository carDetailRepository;
+
+    private final SelectOptionRepository selectOptionRepository;
+    private final CarOptionRepository carOptionRepository;
+
+
+    @Autowired
+    public CarService(CarRepository carRepository, OptionRepository optionRepository, CarDetailRepository carDetailRepository, CarOptionRepository carOptionRepository, SelectOptionRepository selectOptionRepository) {
+        this.optionRepository = optionRepository;
+        this.carRepository = carRepository;
+        this.carDetailRepository = carDetailRepository;
+        this.carOptionRepository = carOptionRepository;
+        this.selectOptionRepository =selectOptionRepository;
+
+    }
+
     public List<Car> getCarsBySearch(List<String> brand, List<String> size, String engine, Long displacement) {
         return carRepository.getCarsBySearch(brand, size, engine, displacement);
     }
 
 
+
+    public List<Option> getOptionByCarId(Long id) {
+        return optionRepository.getOptionByCarId(id);
+    }
+
+    public List<CarDetail> getColor() {
+        return carDetailRepository.getColor();
+    }
+
+    public List<CarDetail> getCarDetailByColorId(List<Integer> id) {
+        return carDetailRepository.getCarDetailByColorId(id);
+    }
+
+    public List<CarDetail2> getCarDetail2ByColorId(List<Integer> id) {
+        return carDetailRepository.getCarDetail2ByColorId(id);
+    }
+
+    public List<CarDetail2> getColor2() {
+        return carDetailRepository.getColor2();
+    }
+
+    public List<CarOption> getList() {
+        return carOptionRepository.findAll();
+    }
+
+
+
+    public List<CarOption> getCarOptionById(List<Integer> id){ return carOptionRepository.findById(id);}
+
+//    public List<CarOption> getCarOptionByOptionId(List<List<Integer>> optionIds) {
+//        return carOptionRepository.getCarDetailByColorId(optionIds);
+//    }
+
+//    public List<Integer> getCarOptionIdsById(Integer id) {
+//        return carOptionRepository.findById(id);
+//    }
+
+    public List<Integer> getSelectOptionIdsById(Integer i) {
+        return selectOptionRepository.findOptionDetailById(i);
+    }
+
+    public void delete(List<Integer> id) {
+        this.carOptionRepository.doDelete(id);
+        this.carOptionRepository.doDelete2(id);
+
+
+    }
+    public void delete2(List<Integer> id) {
+
+
+    }
 
 }

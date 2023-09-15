@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fullpage 연습</title>
+
+    <link rel="stylesheet" href="fullpage.css" />
+    <!-- 제이쿼리 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link
+            type="text/css"
+            media="screen"
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+    />
+</head>
+
+<body>
+<form action="doDelete" method="post">
+<div class="top-bar-section">
+    <div class="top-bar-container"> </div>
+
+</div>
+
+<div class="main-section">
+    <div class="main-box1">
+
+        <div  style=" margin-right:20px; "><button   type="submit" class = "delButton">삭제</button></div>
+    </div>
+    <div class="main-box2">
+       <div class="main-box2-title">
+           <div  class="main-box2-title-item1" style="">모델</div>
+           <div class="main-box2-title-item2" style="">견적 금액</div>
+           <div class="main-box2-title-item3" style="">견적일</div>
+           <div class="main-box2-title-item4" style=""><div><span>전체 선택</span></div><div><input class="allCheckBox" type="checkBox"></div>  </div>
+       </div>
+
+<!--삭제 폼 넣기-->
+
+<!--      견적 db 들어갈 공간 -->
+        <div   style="" class="main-box2-body">
+            <div class="main-box2-body-container" th:each="selectOption, s : ${selectOption}">
+
+                <div class="main-box2-body-container-item1">
+                    <a th:href="@{|/myPageDetail/${selectOption.id}|}">
+                        <div><img class="option-car" src="" th:src="${selectOption.outImgUrl}"></div>
+                    </a>
+                </div>
+                <div class="main-box2-body-container-item2" th:text="${selectOption.wholePrice}+원" ></div>
+                <div class="main-box2-body-container-item3" th:text="${selectOption.createDate}" ></div>
+                <div class="main-box2-body-container-item4" >
+                    <input class="main-box2-body-container-checkbox" name="id" th:value="${selectOption.id}" type="checkbox">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="main-box3">
+        <div class="text-item">
+            <div><h2>안내 사항</h2></div>
+            <div><span>견적서는 최대 3개월 까지 보관됩니다.</span></div>
+            <div> <span>견적서 비교는 승용 차종만 최대 4대 까지 비교 할 수 있습니다.</span></div>
+
+
+        </div>
+
+    </div>
+</div>
+</form>
+
+
+</body>
+
+<style>
+    body {
+      font-family: 'Nanum Gothic'
+    }
+
+
+        .top-bar-section {
+
+     width : 100%;
+     height :100px;
+    }
+
+    .top-bar-container {
+         width:1680px;
+         height:100px;
+         margin-left:auto;
+         margin-right:auto;
+    }
+
+        .main-section {
+        width:1440px;
+        margin-left:auto;
+         margin-right:auto;
+         height: 1000px;
+
+
+        }
+
+        .main-section > div{
+        margin: 50px 0 ;
+
+        }
+
+        .main-box1 {
+     justify-content: space-between;
+         height: 50px;
+        display:flex;
+        font-size:20px;
+
+        }
+        .main-box1 {
+        line-height:43px;
+
+        }
+        .allCheckBox {
+
+
+        }
+
+
+        .delButton{
+
+            width:200px;
+            height: 50px;
+            background-color:gray;
+            color:white;
+
+        }
+
+
+
+        .main-box2 {
+        border:1px solid gray;
+
+         max-height: 1400px;
+        color:#515250;
+
+
+        }
+
+        .main-box2-title{
+                width: 100%;
+                display:flex;
+                justify-content : space-around;
+                background-color:#e0e0dc;
+                font-size:40px;
+                text-align:center;
+        }
+
+
+
+        .main-box2-title-item1 {
+        width:300px;
+        margin-left:-20px;
+                   border:1px solid green;
+
+        }
+
+        .main-box2-title-item2 {
+        width:300px;
+
+        border:1px solid green;
+        }
+
+
+        .main-box2-title-item3 {
+        width:300px;
+
+        border:1px solid green;
+
+        }
+
+
+        .main-box2-title-item4 {
+
+           margin-right:30px;
+        border:1px solid green;
+
+        flex-wrap:wrap;
+        justify-content:center;
+        font-size:20px;
+        }
+
+        .main-box2-body-container{
+        display :flex;
+
+           text-align:center;
+            font-size:20px;
+
+            max-height:1500px;
+            line-height:170px;
+            border:1px solid gray;
+            height:150px;
+
+
+
+        }
+
+          .option-car{
+                width:300px;
+                height:170px;
+
+        }
+
+        .main-box2-body-container-item1 {
+            width:300px;
+          flex-basis=0;
+          margin-left:40px;
+        }
+
+        .main-box2-body-container-item2 {
+            font-size:40px;
+            width:300px;
+          flex-basis=0;
+          margin-left:100px;
+
+        }
+
+        .main-box2-body-container-item3 {
+             font-size:40px;
+          flex-basis=0;
+          width:300px;
+          margin-left:120px;
+        }
+
+        .main-box2-body-container-item4 {
+            margin-left:142px;
+          flex-basis=0;
+        }
+
+    .main-box3 {
+
+         height: 300px;
+         background-color:#e0e0dc;
+         border:1px solid blue;
+        }
+
+
+     .text-item {
+        border:1px solid red;
+        margin-top:50px;
+        margin-left:30px;
+        font-size:25px;
+        }
+</style>
+
+<script>
+    var allCheckBox = $(".allCheckBox");
+
+
+    allCheckBox.click(function(){
+    if (allCheckBox.prop("checked")) {
+       console.log("체크박스 체크 상태");
+           $(".main-box2-body-container-checkbox").prop("checked",true);
+
+
+    }
+    else {
+    console.log("체크박스 해제 상태 ");
+    $(".main-box2-body-container-checkbox").prop("checked",false);
+    }
+});
+
+</script>
