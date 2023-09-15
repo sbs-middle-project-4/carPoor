@@ -14,4 +14,12 @@ public class SearchForm {
     private String engine;
     private Long displacement;
 
+
+
+
+
+
+    private Long distanceDriven;
+    private Long maxPrice;
+
 }
