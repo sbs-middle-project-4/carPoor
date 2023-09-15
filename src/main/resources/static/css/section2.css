@@ -6,21 +6,26 @@
 
             .option-section {
                 display :flex;
-                width :100%;
-                height: 100%;
+                width :97%;
+                height: 80%;
+                border:1px solid black;
+                margin-top:80px;
+                margin-left:auto;
+                margin-right:auto;
 
             }
             .img-section {
              width:65%;
-             height:100%;
+             height:700px;
              border-right:1px solid black;
+
 
             }
             .img-section > .img-container {
 
 
                  width :  1000px ;
-                 height: 800px ;
+                 height: 700px ;
                 margin-left: auto;
                 margin-right: auto;
 
@@ -61,16 +66,21 @@
             .option-container {
 
             width: 100%;
-            height:100%;
+            height:80%;
 
             margin-top:0px;
 
             }
+
+
+
              .option-container > .scrollable-container {
-             height:80%;
+             height:700px;
              width : 90%;
 
                 overflow-y: scroll;
+
+                      position: relative;
 
 
              }
@@ -151,7 +161,7 @@
                 background-color: rgba(173, 216, 230, 0);
 
                 transition: transform 0.3s ease, background-color 0.3s ease; /* 부드러운 변화 효과 */
-                 border:2px solid #007fa8;
+                 border:5px solid #007fa8;
 
 
             }
