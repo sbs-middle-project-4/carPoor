@@ -21,7 +21,7 @@ public class SelectOption {
     private Long id;
 
     @Column() // VARCHAR(200)
-    private Integer userId;
+    private Long userId;
 
 
     @ElementCollection

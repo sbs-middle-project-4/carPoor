@@ -4,12 +4,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.carPoor.domain.*;
 import com.project.carPoor.service.CarService;
+import com.project.carPoor.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,12 +20,13 @@ import java.util.List;
 @RequestMapping("/car")  // /car 로 시작하는 url 은 여기서 찾음
 // final 변수 생성자
 public class CarController {
-
+    private final MemberService memberService;
     private final CarService carService;
 
     private List<Car> cars; // 검색으로 뽑힌 자동차가 저장될 곳.
     @GetMapping("/list/hyundai")
     public String showListHyundai() {
+
 
         List<Car> cars = carService.getCarsBySearch(null, null, null, null);
 
@@ -45,6 +48,7 @@ public class CarController {
 
         return "/car/list";
     }
+
 
     @GetMapping("/getCars") // ajax 비동기 데이터 전송
     @ResponseBody
@@ -87,15 +91,23 @@ public class CarController {
     }
 
     @GetMapping("/myPage") //
-    public String showMyPage(Model model,Integer userId, Integer selectOptionId) {
+    public String showMyPage(Model model,Integer userId, Integer selectOptionId,
+                             Principal principal) {
+
+
         //여기에는 이제 userId 를 매개변수로 넣어서 그 userId 의 차 견적 정보만 뜨게 하기
         // 지금은 전체 견적 리스트 뽑음
         //상세페이지에서는 이 리스트가 하나만 나오게 해야됨
         //내 차만들기 하고 바로 견적서 보여주려면 로그인한 유저의 가장 최근에 추가된
         // selectOption db 정보를 보여주면 될것같다.
-        List<SelectOption> selectOptions = carService.getSelectOptionList();
-
         System.out.println("마이 페이지 실행 시작");
+        Member member = memberService.getMemberByLoginId(principal.getName());
+
+        System.out.println(member.getId()+"멤버의 id");
+        List<SelectOption> selectOptions = carService.getSelectOptionList(member.getId());
+        System.out.println(selectOptions.get(0).getCreateDate()+"옵션 생성날짜 id");
+
+
         List<Integer> colorIds = new ArrayList<>();
 
 //         여기에 유저id ,userId 나 그런거 넣으면 optionid 를 리스트 형태로 반환함

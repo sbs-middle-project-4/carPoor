@@ -14,7 +14,6 @@ public class CarService {
     private final CarRepository carRepository;
 
     private final CarOptionRepository carOptionRepository;
-    private final OptionRepository optionRepository;
 
     private final CarDetailRepository carDetailRepository;
 
@@ -40,9 +39,7 @@ public class CarService {
     public List<CarDetail2> getCarDetail2ByColorId(List<Integer> id) {
         return carDetailRepository.getCarDetail2ByColorId(id);
     }
-    public List<Option> getOptionByCarId(Long id) {
-        return optionRepository.getOptionByCarId(id);
-    }
+
 
     public List<CarDetail2> getColor2() {
         return carDetailRepository.getColor2();
@@ -84,16 +81,17 @@ public class CarService {
     }
 
 
-    public SelectOption create(Integer userId, Integer inColorId,List<Integer> optionId ,Integer outColorId,
-                               Integer wholePrice ,String outImgUrl, String inImgUrl  ) {
+    public SelectOption create( Integer inColorId,List<Integer> optionId ,Integer outColorId,
+                               Integer wholePrice ,String outImgUrl, String inImgUrl,
+                               Long userId ) {
 
 
 
-        return selectOptionRepository.create(userId,inColorId,optionId,outColorId,wholePrice,outImgUrl,inImgUrl);
+        return selectOptionRepository.create(inColorId,optionId,outColorId,wholePrice,outImgUrl,inImgUrl,userId);
     }
 
-    public List<SelectOption> getSelectOptionList() {
-        return this.selectOptionRepository.findAll();
+    public List<SelectOption> getSelectOptionList(Long userId) {
+        return this.selectOptionRepository.findAll(userId);
     }
 
 

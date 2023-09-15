@@ -1,3 +1,11 @@
+.section-1 {
+    background-image:  url("https://www.hyundai.com/static/images/model/santafe/23fc/the_all_new_santafe_design.jpg");
+
+     background-size: cover;
+
+}
+
+
 .video-container {
   position: fixed;
   top: 0;
