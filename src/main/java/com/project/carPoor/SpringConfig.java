@@ -18,37 +18,7 @@ public class SpringConfig {
     }
 
 
-    @Bean
-    public CarService carService() {
-        return new CarService(carRepository(), optionRepository(), carDetailRepository() ,carOptionRepository() ,selectOptionRepository());
-    }
 
-    @Bean
-    public CarRepository carRepository() {
-        return new JpaCarRepository(em);
-    }
-
-    @Bean
-    public OptionRepository optionRepository() {
-        return new JpaOptionRepository(em);
-    }
-
-    @Bean
-    public CarDetailRepository carDetailRepository() {
-        return new JpaCarDetailRepository(em);
-    }
-
-
-    @Bean
-    public CarOptionRepository carOptionRepository() {
-        return new JpaCarOptionRepository(em);
-    }
-
-
-    @Bean
-    public SelectOptionRepository selectOptionRepository() {
-        return new JpaSelectOptionRepository(em);
-    }
 
 
 

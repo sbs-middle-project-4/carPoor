@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.carPoor.domain.*;
 import com.project.carPoor.service.CarService;
-import com.project.carPoor.service.SelectOptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,24 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/car")  // /car 로 시작하는 url 은 여기서 찾음
-@RequiredArgsConstructor // final 변수 생성자
+// final 변수 생성자
 public class CarController {
 
     private final CarService carService;
 
-    @Autowired
-    private SelectOptionService selectOptionService;
-    private List<SelectOption> selectOptions;
-
     private List<Car> cars; // 검색으로 뽑힌 자동차가 저장될 곳.
-
-    @Autowired
-    public CarController(CarService carService) {
-        this.carService = carService;
-    }
-
-
     @GetMapping("/list/hyundai")
     public String showListHyundai() {
 
@@ -75,7 +64,7 @@ public class CarController {
 
         List<CarDetail> carDetails =carService.getColor();
         List<CarDetail2> carDetails2 = carService.getColor2();
-        List<CarOption> carOption = carService.getList();
+        List<CarOption> carOption = carService.getCarOptionList();
 
         System.out.println(carDetails2.get(0).getBtnUrl());
 
@@ -105,7 +94,7 @@ public class CarController {
         //상세페이지에서는 이 리스트가 하나만 나오게 해야됨
         //내 차만들기 하고 바로 견적서 보여주려면 로그인한 유저의 가장 최근에 추가된
         // selectOption db 정보를 보여주면 될것같다.
-        List<SelectOption> selectOptions = selectOptionService.getList();
+        List<SelectOption> selectOptions = carService.getSelectOptionList();
 
         System.out.println("마이 페이지 실행 시작");
         List<Integer> colorIds = new ArrayList<>();
@@ -154,7 +143,7 @@ public class CarController {
         System.out.println("견적 상세페이지 실행됨");
         System.out.println(selectOptionId);
 
-        List<SelectOption> selectOptions= selectOptionService.getListBySelectOptionId(selectOptionId);
+        List<SelectOption> selectOptions= carService.getListBySelectOptionId(selectOptionId);
 
         System.out.println(selectOptions);
         System.out.println(selectOptions.get(0).getWholePrice());
