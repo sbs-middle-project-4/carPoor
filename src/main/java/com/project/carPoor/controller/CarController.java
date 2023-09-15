@@ -66,7 +66,6 @@ public class CarController {
         List<CarDetail2> carDetails2 = carService.getColor2();
         List<CarOption> carOption = carService.getCarOptionList();
 
-        System.out.println(carDetails2.get(0).getBtnUrl());
 
         model.addAttribute("carDetails", carDetails);
         model.addAttribute("carDetails2", carDetails2);
@@ -188,7 +187,7 @@ public class CarController {
         carService.delete(id);
 
 
-        return "redirect:/myPage";
+        return "redirect:/car/myPage";
     }
 
 

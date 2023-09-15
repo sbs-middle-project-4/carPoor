@@ -18,7 +18,8 @@
 </head>
 
 <body>
-<form action="doDelete" method="post">
+<form action="/car/doDelete" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 <div class="top-bar-section">
     <div class="top-bar-container"> </div>
 
@@ -44,7 +45,7 @@
             <div class="main-box2-body-container" th:each="selectOption, s : ${selectOption}">
 
                 <div class="main-box2-body-container-item1">
-                    <a th:href="@{|/myPageDetail/${selectOption.id}|}">
+                    <a th:href="@{|/car/myPageDetail/${selectOption.id}|}">
                         <div><img class="option-car" src="" th:src="${selectOption.outImgUrl}"></div>
                     </a>
                 </div>

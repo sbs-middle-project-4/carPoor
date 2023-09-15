@@ -3,6 +3,7 @@ package com.project.carPoor.repository;
 
 import com.project.carPoor.domain.CarDetail;
 import com.project.carPoor.domain.CarDetail2;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +13,16 @@ import java.util.List;
 
 
 @Repository
-
 public class CarDetailRepository {
 
+    private final JPAQueryFactory query;
 
+    private final EntityManager em;
 
-    private EntityManager em;
-
-//    public JpaCarDetailRepository(EntityManager em) {
-//        this.em = em;
-//    }
+    public CarDetailRepository(EntityManager em) {
+        this.em = em;
+        this.query = new JPAQueryFactory(em);
+    }
 
     public List<CarDetail> getColor() {
         return em.createQuery("select c from CarDetail c", CarDetail.class)
