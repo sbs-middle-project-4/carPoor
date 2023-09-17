@@ -1,10 +1,12 @@
 package com.project.carPoor.controller;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.project.carPoor.domain.Question;
 import com.project.carPoor.service.EmailService;
 import com.project.carPoor.domain.EmailMessage;
 import com.project.carPoor.domain.Member;
 import com.project.carPoor.service.MemberService;
+import com.project.carPoor.service.QuestionService;
 import com.project.carPoor.validator.CheckEmailValidator;
 import com.project.carPoor.validator.CheckLoginIdValidateor;
 import com.project.carPoor.validator.CheckPasswordValidator;
@@ -12,6 +14,8 @@ import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,6 +27,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -36,6 +41,7 @@ public class MemberController {
     private final CheckLoginIdValidateor checkLoginIdValidateor;
     private final CheckPasswordValidator checkPasswordValidator;
     private final EmailService emailService;
+    private final QuestionService questionService;
 
     private Member member;
 
@@ -194,10 +200,41 @@ public class MemberController {
     }
 
 
-
     // 회원정보 수정 로직 끝
 
+    @GetMapping("/showList")
+    public String showQuestionList(Principal principal, Model model) {
 
+        Member member = this.memberService.getMemberByLoginId(principal.getName());
+        List<Question> questions = this.questionService.findQuestionsByAuthorId(member.getId());
 
+        model.addAttribute("member", member);
+        model.addAttribute("questions", questions);
+
+        return "/member/questionList";
+    }
+
+    @GetMapping("/showAllList")
+    public String showQuestionAllList(Principal principal, Model model) {
+
+        Member member = this.memberService.getMemberByLoginId(principal.getName());
+        List<Question> questions = this.questionService.findIsPublicQuestion();
+
+        model.addAttribute("member", member);
+        model.addAttribute("questions", questions);
+
+        return "/member/questionList";
+    }
+
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/admin")
+    public String showAdminPage(Model model) {
+
+        List<Question> questions = this.questionService.findAll();
+
+        model.addAttribute("questions", questions);
+
+        return "/admin/answer";
+    }
 
 }

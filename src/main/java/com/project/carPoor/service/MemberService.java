@@ -1,5 +1,6 @@
 package com.project.carPoor.service;
 
+import com.project.carPoor.domain.Question;
 import com.project.carPoor.repository.MemberRepository;
 import com.project.carPoor.domain.Member;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -58,5 +60,7 @@ public class MemberService {
         }
 
     }
+
+
 
 }

@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -30,6 +32,7 @@ public class Member {
 
     private boolean joinStatus;
 
-
+    @OneToMany(mappedBy = "author")
+    private List<Question> question;
 
 }

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <title>Title</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<header>
+    <div class="container    w-[1920px] h-[100px] mr-auto ml-auto flex" >
+        <div class="navbar bg-base-100">
+            <div class="flex-1">
+                <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+            </div>
+            <div class="flex-none">
+                <ul class="menu menu-horizontal px-1">
+                    <li><a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/member/sign}">로그인</a>
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a></li>
+                    <li>
+                        <details>
+                            <summary>
+                                Parent
+                            </summary>
+                            <ul class="p-2 bg-base-100">
+                                <li><a href="/member/showMemberInfo">마이페이지</a></li>
+                                <li><a>Link 2</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<body class="flex flex-col justify-center  items-center">
+
+<div class="middle6 card bg-gray-100 text-black text-xl pt-5 w-[80%] h-[80vh]">
+
+    <form th:action="@{/question/delete}" method="post" class="overflow-x-auto question-list-vue-app">
+        <table class="table">
+            <!-- head -->
+            <thead>
+            <tr>
+                <th class=" w-12"></th>
+                <th class=" text-start w-auto">제목</th>
+                <th class=" text-center w-28">답변 상태</th>
+                <th class=" text-center w-36">질문자</th>
+                <th class=" text-center w-12"></th>
+            </tr>
+            </thead>
+            <tbody class="overflow-y-auto">
+
+            <tr th:each="question, stat : ${questions}">
+                <th th:text="${stat.index + 1}"></th>
+                <td class="hover:underline">
+                    <a th:href="@{'/question/detail/' + ${question.id}}" th:text="${question.subject}"></a>
+                </td>
+                <td class="text-center" th:text="${question.answerStatus}"></td>
+                <td class="text-center" th:text="${question.author.name}"></td>
+                <td>
+                    <input type="checkbox" name="questionIds" th:value="${question.id}">
+                </td>
+            </tr>
+
+            <div class="flex justify-end mr-12">
+                <button type="submit" class="btn btn-outline">삭제</button>
+            </div>
+
+            </tbody>
+        </table>
+    </form>
+</div>
+
+
+</body>
