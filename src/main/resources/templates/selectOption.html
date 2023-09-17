@@ -34,9 +34,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.19/fullpage.min.js"></script>
 
 </head>
+<form id="section3-form" th:action="@{/createSelectOption}"  method="post">
+
 <body>
 
-<form id="section3-form" th:action="@{/createSelectOption}"  method="post">
 <!--    탑바 시작-->
     <div class="top-bar-test">
         <div style="font-size:20px" ><a href="/car/myPage">myPage</a>  </div>
@@ -45,11 +46,9 @@
 
 <!--    탑바 끝   -->
     <div id="fullpage">
-       
-    <!-- 1 -->
+
+        <!-- 1 -->
     <div  class="section section-1">
-
-
 
         <a href="#section2"
         ></a>
@@ -150,8 +149,9 @@
 
 
                 <div class="option-container">
-                    <h2  style="margin-bottom:20px; margin-left:40px">옵션</h2>
+                    <h2  style="margin-bottom:20px; margin-left:40px">옵션</h2>   <button id="scrollUpButton">위로</button>
                     <div class="scrollable-container">
+
                         <div class="option-box" >
                             <div  id="box" class="option-item"  th:each="carOption : ${carOption}" th:id="${carOption.id}">
                                 <a >
@@ -172,20 +172,48 @@
 
                             </div>
                         </div>
-                    </div>
+
+
+                    </div> <button id="scrollDownButton">아래로</button>
                 </div>
 
             </div>
         </div>
+        <button class="btn-check" style="margin-top:20px;"  >차 등록</button>
 
-        <button class="btn-submit" type="submit" style="margin-top:20px;" value="" name="wholePrice" >차 등록</button>
+        <div class="select-btn-section">
+            <div>이 옵션 대로 차 견적서를 등록하시겠습니까?</div>
+            <div class="select-btn-container">
+                <div>
+                    <button class="select-yes-btn btn-submit" type="submit" value="" name="wholePrice">확인</button>
+                </div>
+                <div>
+                    <button class="select-no-btn">취소</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div th:if="${selectTrue}"  class="select-btn-section2">
+            <div>견적서가 등록되었습니다. 마이페이지를 가시겠습니까?</div>
+            <div class="select-btn-container2">
+                <div>
+                    <button class="select-yes-btn2 btn-submit" type="submit" value="" name="wholePrice">확인</button>
+                </div>
+                <div>
+                    <button class="select-no-btn2">취소</button>
+                </div>
+            </div>
+
+        </div>
 
 
 
-
+        <div style="width:100px; height;50px;"></div>
 
     </div>
-    <!-- 4 -->
+
+<!-- 4 -->
     <div class="section section-4">
         <a href="#section1"
         ><img
@@ -195,11 +223,15 @@
         <h1>반갑습니다 섹션4입니다.</h1>
     </div>
 
-        <input type="hidden" value="" name="wholePrice" />
+
+
+
 
     </div>
-</form>
 </body>
+<input type="hidden" value="" name="wholePrice" />
+</form>
+
 </html>
 
 <style>

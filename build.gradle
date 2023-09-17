@@ -43,6 +43,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
+//	pdf 라이브러리
+	implementation 'org.apache.pdfbox:pdfbox:2.0.27'
 
 
 

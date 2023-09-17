@@ -25,3 +25,4 @@ new fullpage('#fullpage', {
   // scrollOverflow 옵션 활성화
   scrollOverflow: true,
 });
+
