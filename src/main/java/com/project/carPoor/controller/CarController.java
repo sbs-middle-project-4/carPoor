@@ -63,13 +63,14 @@ public class CarController {
 
 
 
-    @GetMapping("/color")
+    @GetMapping("/color{selectTrue}")
     public String getColor(Model model) {
 
         List<CarDetail> carDetails =carService.getColor();
         List<CarDetail2> carDetails2 = carService.getColor2();
         List<CarOption> carOption = carService.getCarOptionList();
 
+        model.addAttribute("selectTrue");
 
         model.addAttribute("carDetails", carDetails);
         model.addAttribute("carDetails2", carDetails2);
@@ -105,9 +106,7 @@ public class CarController {
 
         System.out.println(member.getId()+"멤버의 id");
         List<SelectOption> selectOptions = carService.getSelectOptionList(member.getId());
-        System.out.println(selectOptions.get(0).getCreateDate()+"옵션 생성날짜 id");
-        System.out.println(selectOptions.get(1).getOutColorId());
-        System.out.println(selectOptions.get(2).getOutColorId());
+
 
         List<Integer> colorIds = new ArrayList<>();
 

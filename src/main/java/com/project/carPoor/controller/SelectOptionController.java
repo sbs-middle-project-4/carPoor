@@ -23,6 +23,7 @@ public class SelectOptionController {
     private  Member member;
     private final MemberService memberService;
     @PostMapping("/createSelectOption")
+    @GetMapping
     public String result(Model model, SelectForm selectForm, @Valid SelectOption selectOption,
                          Principal principal) {
         System.out.println("옵션만들기 1차 ");
@@ -46,9 +47,9 @@ public class SelectOptionController {
 
         System.out.println("바로 견적서 보여주기 파트");
 
-//        model.addAttribute("selectOption",selectOptions);
+        model.addAttribute("selectTrue", true);
 
-        return "redirect:/car/myPage";
+        return "redirect:/car/color#section3?selectTrue=true";
     }
 
 
