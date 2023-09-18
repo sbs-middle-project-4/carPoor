@@ -57,6 +57,7 @@
             <div class="main-box2-body-container" th:each="selectOption, s : ${selectOption}">
 
                 <div class="main-box2-body-container-item1">
+
                     <a th:href="@{|/car/myPageDetail/${selectOption.id}|}">
                         <div><img class="option-car" src="" th:src="${selectOption.outImgUrl}"></div>
                     </a>
@@ -108,7 +109,7 @@
     }
 
         .main-section {
-        width:1440px;
+        width:1040px;
         margin-left:auto;
          margin-right:auto;
          height: 1000px;
@@ -172,19 +173,19 @@
 
 
         .main-box2-title-item1 {
-        width:300px;
+        width:220px;
         margin-left:-20px;
         line-height:60px;
         }
 
         .main-box2-title-item2 {
-        width:300px;
+        width:250px;
                line-height:60px;
         }
 
 
         .main-box2-title-item3 {
-        width:300px;
+        width:250px;
            line-height:60px;
 
         }
@@ -192,7 +193,6 @@
 
         .main-box2-title-item4 {
 
-           margin-right:30px;
 
         flex-wrap:wrap;
         justify-content:center;
@@ -215,22 +215,23 @@
         }
 
           .option-car{
-                width:300px;
-                height:170px;
+                width:380px;
+                height:160px;
 
         }
 
         .main-box2-body-container-item1 {
-            width:300px;
+            width:330px;
           flex-basis=0;
           margin-left:40px;
+          height:50px;
         }
 
         .main-box2-body-container-item2 {
             font-size:20px;
             width:300px;
           flex-basis=0;
-          margin-left:100px;
+          margin-left:60px;
 
         }
 
@@ -243,6 +244,7 @@
 
         .main-box2-body-container-item4 {
             margin-left:142px;
+            margin-right:60px;
           flex-basis=0;
         }
 
