@@ -14,6 +14,12 @@
     <!-- 제이쿼리 불러오기 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <link href="/dist/output.css" rel="stylesheet">
     <!-- 풀페이지 불러오기 -->
     <link
             rel="stylesheet"
@@ -194,16 +200,16 @@
 
 
         </div>
-        <button class="btn-check" style="margin-top:20px;"  >차 등록</button>
+        <button class="btn-check bg-indigo-500  " style="margin-top:20px;"  >차 등록</button>
 
-        <div class="select-btn-section">
-            <div>이 옵션 대로 차 견적서를 등록하시겠습니까?</div>
+        <div class="select-btn-section bg-indigo-500">
+            <div class="m-5">이 옵션 대로 차 견적서를 등록하시겠습니까?</div>
             <div class="select-btn-container">
                 <div>
-                    <button class="select-yes-btn btn-submit" type="submit" value="" name="wholePrice">확인</button>
+                    <button class="select-yes-btn btn-submit ring-offset-2 ring-2" type="submit" value="" name="wholePrice">확인</button>
                 </div>
                 <div>
-                    <button class="select-no-btn">취소</button>
+                    <button class="select-no-btn ring-offset-2 ring-2">취소</button>
                 </div>
             </div>
 

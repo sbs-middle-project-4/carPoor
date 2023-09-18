@@ -9,7 +9,7 @@
                 display :flex;
                 width :97%;
                 height: 80%;
-                border:1px solid black;
+
                 margin-top:80px;
                 margin-left:auto;
                 margin-right:auto;
@@ -50,7 +50,7 @@
 
 
              .img-section> .img-container>.information-box {
-                            width :  600px ;
+                            width : 100% ;
                             height: 25g0px ;
 
                         margin-top:15px;
@@ -182,14 +182,15 @@
                 top:50%;
                 left:50%;
                 transform:translate(-50%,-50%);
-                width:200px;
-                height:100px;
-                background-color :white;
+                width:350px;
+                height:150px;
+               color:white;
+                font-size:20px;
+
+
             }
 
-            .select-btn-section2 {
 
-            }
 
             .btn-check {
             display:block;
@@ -197,5 +198,16 @@
                 margin-right:auto;
                 width:100px;
                 height:40px;
+                color : white;
 
             }
+
+            .select-btn-container {
+                display:flex;
+                margin-top:20px;
+                 justify-content: space-around;
+
+                     border-radius: 5px;
+
+            }
+
