@@ -30,27 +30,6 @@
 
     });
 
-document.getElementById("scrollUpButton").addEventListener("click", function() {
-    scrollVertically(-100); // 원하는 만큼 위로 스크롤
-              event.preventDefault();
-
-});
-
-// 아래로 스크롤 버튼 클릭 시
-document.getElementById("scrollDownButton").addEventListener("click", function() {
-    scrollVertically(100); // 원하는 만큼 아래로 스크롤
-              event.preventDefault();
-
-});
-
-// 스크롤 함수 정의
-function scrollVertically(amount) {
-    window.scrollBy({
-        top: amount,
-        left: 0,
-        behavior: "smooth" // 부드러운 스크롤 효과를 위해 추가
-    });
-}
 
 
 
