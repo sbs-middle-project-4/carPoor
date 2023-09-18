@@ -26,7 +26,7 @@
           event.preventDefault();
     });
    $(".select-yes-btn").click(function() {
-         viewBtn2();
+
 
     });
 

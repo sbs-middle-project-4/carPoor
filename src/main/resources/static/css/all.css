@@ -24,14 +24,14 @@
             .top-bar-test {
                 position:fixed;
                 top:0;
-               z-index:10;
+               z-index:2;
                 width: 100%; /* Make it full width */
                    background-color: white;
                    text-align:center;
                    height:100px;
-                   opacity: 0.3;
+
                    font-size:50px;
-                   background-color:skyblue;
+
 
             }
 

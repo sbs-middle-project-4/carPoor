@@ -50,19 +50,9 @@
 
         <!-- 1 -->
     <div  class="section section-1">
-        <div class="bg-color">
+
         <a href="#section2"
         ></a>
-
-        <div class="section1-text-container">
-            <h1>Design</h1>
-            <div>미래 지향적인 디테일에 견고한 디자인을 더해</div>
-            <div>싼타페만의 압도적인 존재감을 전달합니다.</div>
-            
-        </div>
-
-        </div>
-        
     </div>
     <!-- fp-auto-height 화면높이만큼 다음페이지 살짝나옴 -->
     <!-- 2 -->
@@ -205,14 +195,14 @@
 
         </div>
 
-        <div style="display:none;" class="select-btn-section2">
+        <div style="display :none" class="select-btn-section2">
             <div>견적서가 등록되었습니다. 마이페이지를 가시겠습니까?</div>
             <div class="select-btn-container2">
                 <div>
-                    <button class="select-yes-btn2 btn-submit" type="submit" value="" name="wholePrice">확인</button>
+                    <button class="select-yes-btn2 btn-submit" type="submit" value="" name="wholePrice"><a th:href="@{/car/myPage}">확인</a></button>
                 </div>
                 <div>
-                    <button class="select-no-btn2">취소</button>
+                    <button class="select-no-btn2"><a th:href="@{/car/color}">취소</a></button>
                 </div>
             </div>
 
@@ -261,8 +251,16 @@
 display: block;
 }
 
+    .select-yes-btn2{
+
+
+
+
 
 </style>
 
 
+<script>
 
+
+</script>
