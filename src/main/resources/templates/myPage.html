@@ -14,6 +14,12 @@
     <!-- 제이쿼리 불러오기 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.5/dist/full.css" rel="stylesheet" type="text/css" />
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css"/>
+
 
     <link
             type="text/css"
@@ -31,13 +37,13 @@
 
 </div>
 
-<div class="main-section">
+<div class="main-section  ">
     <div class="main-box1">
 
-        <div  style=" margin-right:20px; "><button   type="submit" class = "delButton">삭제</button></div>
+        <div  style=" margin-right:20px; "><button   type="submit" class = "delButton checkbox-xs">삭제</button></div>
     </div>
     <div class="main-box2">
-       <div class="main-box2-title">
+       <div class="main-box2-title "  data-theme="light">
            <div  class="main-box2-title-item1" style="">모델</div>
            <div class="main-box2-title-item2" style="">견적 금액</div>
            <div class="main-box2-title-item3" style="">견적일</div>
@@ -58,7 +64,7 @@
                 <div class="main-box2-body-container-item2" th:text="${selectOption.wholePrice}+원" ></div>
                 <div class="main-box2-body-container-item3" th:text="${selectOption.createDate}" ></div>
                 <div class="main-box2-body-container-item4" >
-                    <input class="main-box2-body-container-checkbox" name="id" th:value="${selectOption.id}" type="checkbox">
+                    <input class="main-box2-body-container-checkbox checkbox-xs" name="id" th:value="${selectOption.id}" type="checkbox">
                     </div>
             </div>
         </div>
@@ -68,6 +74,7 @@
     <div class="main-box3">
         <div class="text-item">
             <div><h2>안내 사항</h2></div>
+            <br>
             <div><span>견적서는 최대 3개월 까지 보관됩니다.</span></div>
             <div> <span>견적서 비교는 승용 차종만 최대 4대 까지 비교 할 수 있습니다.</span></div>
 
@@ -143,7 +150,8 @@
 
 
         .main-box2 {
-        border:1px solid gray;
+        border-top:1px solid gray;
+        border-bottom:1px solid gray;
 
          max-height: 1400px;
         color:#515250;
@@ -156,8 +164,9 @@
                 display:flex;
                 justify-content : space-around;
                 background-color:#e0e0dc;
-                font-size:40px;
+                font-size:20px;
                 text-align:center;
+
         }
 
 
@@ -165,21 +174,18 @@
         .main-box2-title-item1 {
         width:300px;
         margin-left:-20px;
-                   border:1px solid green;
-
+        line-height:60px;
         }
 
         .main-box2-title-item2 {
         width:300px;
-
-        border:1px solid green;
+               line-height:60px;
         }
 
 
         .main-box2-title-item3 {
         width:300px;
-
-        border:1px solid green;
+           line-height:60px;
 
         }
 
@@ -187,7 +193,6 @@
         .main-box2-title-item4 {
 
            margin-right:30px;
-        border:1px solid green;
 
         flex-wrap:wrap;
         justify-content:center;
@@ -198,11 +203,11 @@
         display :flex;
 
            text-align:center;
-            font-size:20px;
+            font-size:10px;
 
             max-height:1500px;
             line-height:170px;
-            border:1px solid gray;
+            border-bottom:1px solid gray;
             height:150px;
 
 
@@ -222,7 +227,7 @@
         }
 
         .main-box2-body-container-item2 {
-            font-size:40px;
+            font-size:20px;
             width:300px;
           flex-basis=0;
           margin-left:100px;
@@ -230,7 +235,7 @@
         }
 
         .main-box2-body-container-item3 {
-             font-size:40px;
+             font-size:20px;
           flex-basis=0;
           width:300px;
           margin-left:120px;
@@ -245,14 +250,12 @@
 
          height: 300px;
          background-color:#e0e0dc;
-         border:1px solid blue;
         }
 
 
      .text-item {
-        border:1px solid red;
-        margin-top:50px;
-        margin-left:30px;
+        padding-top:50px;
+        margin-left:50px;
         font-size:25px;
         }
 </style>

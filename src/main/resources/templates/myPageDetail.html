@@ -48,6 +48,7 @@
         <div class="car-img2"><img th:src="${selectOption.inImgUrl}" alt=""></div>
         </div>
         <div><span> * 상기 이미지는 내/외장 색상 선택을 돕기 위한 참고용으로 제공되고 있습니다.</span></div>
+        <br>
         <div>
             <button class="car-img1-btn">내부 </button>
             <button class="car-img2-btn">외부 </button>
@@ -125,17 +126,17 @@
             <div class="whole-carPrice-section" th:each="selectOption: ${selectOption}">
                 <div class="whole-carPrice-container">
                     <div>
-                        <div>차량 총 견적 금액</div>
+                        <div>차량 총 견적 금액 &nbsp &nbsp </div>
                         <div class="wholePrice1"></div>
                         <div style="display:none;" class="wholePrice2" th:text="${selectOption.wholePrice}"></div>
                     </div>
                     <div>
-                        <div>견적 기준일</div>
+                        <div>견적 기준일 &nbsp &nbsp</div>
                         <div th:text="${selectOption.createDate}"> </div>
                     </div>
 
-                    <div>
-                        <button>이메일 발송</button>
+                    <div class="btn-container">
+                        <button>이메일 발송 </button>
                         <button>공유하기</button>
                         <button>저장하기</button>
                         <button onclick="save" id="downloadButton">pdf 저장</button>
@@ -413,6 +414,11 @@
                 height:45px;
         }
 
+    .btn-container>button{
+          margin-left:30px;
+          width: 100px;
+    }
+
 
 </style>
 
@@ -457,4 +463,7 @@
    });
 
     }
+
+
+
 </script>

@@ -14,11 +14,14 @@
                 margin-left:auto;
                 margin-right:auto;
 
+
+
+
             }
             .img-section {
              width:65%;
              height:700px;
-             border-right:1px solid black;
+
 
 
             }
@@ -49,8 +52,7 @@
              .img-section> .img-container>.information-box {
                             width :  600px ;
                             height: 25g0px ;
-                        margin-left: auto;
-                        margin-right: auto;
+
                         margin-top:15px;
                         font-size: 25px;
              }
@@ -80,7 +82,7 @@
              width : 90%;
 
                 overflow-y: scroll;
-
+                   border-left:1px solid black;
                       position: relative;
 
 
@@ -186,5 +188,14 @@
             }
 
             .select-btn-section2 {
+
+            }
+
+            .btn-check {
+            display:block;
+                margin-left:auto;
+                margin-right:auto;
+                width:100px;
+                height:40px;
 
             }
