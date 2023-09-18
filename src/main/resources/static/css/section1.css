@@ -3,6 +3,8 @@
 
      background-size: cover;
 
+    background-color: rgba(0, 0, 0, 0.7);
+      text-align: center; /* 가로 중앙 정렬 */
 }
 
 
@@ -21,4 +23,35 @@
   width: 100%;
   height: 100%;
   pointer-events: none; /* Prevent interactions with the video */
+}
+
+.section1-text-section{
+
+
+}
+
+.bg-color {
+        position:absolute;
+        width:100%;
+        height:100%;
+        z-index=1;
+            background-color:rgba(5,5,5,0.5);
+
+}
+
+
+
+.section1-text-container {
+   display:inline-block;
+    text-align:center;
+    width:800px;
+    font-size:30px;
+    height:150px;
+      vertical-align: middle;
+         vertical-align: middle; /* 세로 중앙 정렬 */
+
+         margin-top:300px;
+         font-weight:bold;
+         color:white;
+
 }

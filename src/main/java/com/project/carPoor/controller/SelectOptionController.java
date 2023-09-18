@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 import java.util.List;
@@ -22,8 +23,7 @@ public class SelectOptionController {
     private  List<SelectOption> selectOptions;
     private  Member member;
     private final MemberService memberService;
-    @PostMapping("/createSelectOption")
-    @GetMapping
+    @PostMapping("/car/color")
     public String result(Model model, SelectForm selectForm, @Valid SelectOption selectOption,
                          Principal principal) {
         System.out.println("옵션만들기 1차 ");
@@ -49,7 +49,7 @@ public class SelectOptionController {
 
         model.addAttribute("selectTrue", true);
 
-        return "redirect:/car/color#section3?selectTrue=true";
+       return "redirect:/car/color#section3";
     }
 
 

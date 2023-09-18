@@ -63,7 +63,7 @@ public class CarController {
 
 
 
-    @GetMapping("/color{selectTrue}")
+    @GetMapping("/color")
     public String getColor(Model model) {
 
         List<CarDetail> carDetails =carService.getColor();
@@ -80,7 +80,23 @@ public class CarController {
 
     }
 
-    @PostMapping("/car/select")
+    @GetMapping("/color2")
+    public String getColor2(Model model) {
+
+        List<CarDetail> carDetails = carService.getColor();
+        List<CarDetail2> carDetails2 = carService.getColor2();
+        List<CarOption> carOption = carService.getCarOptionList();
+
+        model.addAttribute("selectTrue");
+
+        model.addAttribute("carDetails", carDetails);
+        model.addAttribute("carDetails2", carDetails2);
+        model.addAttribute("carOption", carOption);
+
+        return "selectOption2";
+
+    }
+        @PostMapping("/car/select")
     public String getSelect(SelectForm selectForm) {
 
         System.out.println(selectForm.getOptionId());
