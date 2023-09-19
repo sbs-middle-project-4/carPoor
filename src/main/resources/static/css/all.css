@@ -56,3 +56,13 @@
               overflow-y: scroll;
               position: relative;
             }
+
+  /* Set the tooltip color for section 2 to black */
+  #fp-nav ul li[data-tooltip="section2"] a span {
+    color: black !important;
+  }
+
+  /* Set the tooltip color for section 3 to black */
+  #fp-nav ul li[data-tooltip="section3"] a span {
+    color: black !important;
+  }
