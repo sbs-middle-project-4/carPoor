@@ -46,6 +46,9 @@ dependencies {
 //	pdf 라이브러리
 	implementation 'org.apache.pdfbox:pdfbox:2.0.27'
 
+//	셀레니움 라이브러리?
+	implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+
 
 
 

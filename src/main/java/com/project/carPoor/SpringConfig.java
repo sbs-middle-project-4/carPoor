@@ -2,6 +2,7 @@ package com.project.carPoor;
 
 import com.project.carPoor.repository.*;
 import com.project.carPoor.service.CarService;
+import com.project.carPoor.service.PdfConversionService;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +19,6 @@ public class SpringConfig {
     public SpringConfig(EntityManager em) {
         this.em = em;
     }
-
 
 
 

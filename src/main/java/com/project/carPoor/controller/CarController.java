@@ -5,12 +5,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.carPoor.domain.*;
 import com.project.carPoor.service.CarService;
 import com.project.carPoor.service.MemberService;
+import com.project.carPoor.service.PdfConversionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,8 @@ import java.util.List;
 public class CarController {
     private final MemberService memberService;
     private final CarService carService;
+
+
 
     private List<Car> cars; // 검색으로 뽑힌 자동차가 저장될 곳.
     @GetMapping("/list/hyundai")
