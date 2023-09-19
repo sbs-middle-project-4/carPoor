@@ -75,5 +75,39 @@ public class EmailService {
     }
 
 
+    public String sendSelectOptionMail(EmailMessage emailMessage, String type) {
+
+        String authKey = createKey(); // authkey 생성
+
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();  // 전송 할 이메일 객체
+
+        try {
+
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
+            mimeMessageHelper.setTo(emailMessage.getTo()); // 이메일 받을 주소
+            mimeMessageHelper.setSubject(emailMessage.getSubject()); // 이메일 주소
+            mimeMessageHelper.setText(setContext2(authKey, emailMessage.getTo(),type), true); // 전송할 이메일 내용( html 제작 )
+            javaMailSender.send(mimeMessage); // 이메일 전송
+
+            return authKey; // 제작 된 authkey return
+
+        } catch (MessagingException e) {
+
+            throw new RuntimeException(e); // 전송 실패시 throw
+        }
+    }
+
+
+    public String setContext2(String code, String email ,String type) { // 이메일 내용(html) 변수 전달 및 제작
+
+        Context context = new Context();
+
+        context.setVariable("code", code);
+        context.setVariable("email", email);
+
+        return templateEngine.process(type, context);
+    }
+
+
 
 }

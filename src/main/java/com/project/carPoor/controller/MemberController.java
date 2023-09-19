@@ -116,7 +116,35 @@ public class MemberController {
         return "/member/signupAlert";
     }
 
-    @GetMapping("/emailConfirm")
+
+    @GetMapping("/sendEmail")
+    public String sendSelectOptionMail(@Valid SignupForm signupForm, Errors errors, Model model) {
+
+        EmailMessage emailMessage = EmailMessage.builder() // 이메일 전송을 위한 data 준비
+                .to(signupForm.getEmail())
+                .subject("[carPoor] 회원가입 이메일 인증")
+                .build();
+
+        try { // 전송할 수 없는 이메일 입력시 exception 터짐
+           emailService.sendSelectOptionMail(emailMessage, "myPageDetail"); // authkey 생성, 인증 이메일 발송요청(해당 html 파일 전달), authkey 저장
+        } catch (Exception e) {
+            return "/member/signupAlter";
+        }
+
+        member.setJoinStatus(false); // 인증 전
+
+        this.memberService.createMember(member);
+
+        model.addAttribute("Message", "이메일 인증을 완료하면 회원가입이 완료됩니다.");
+
+        return "redirect:/";
+
+            };
+
+
+
+
+        @GetMapping("/emailConfirm")
     @Transactional
     public String doEmailConfirm(String email, String code, Model model) { // 사용자 이메일 인증 mapping
 
