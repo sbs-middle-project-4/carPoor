@@ -151,6 +151,30 @@
 
 </body>
 </div>
+
+
+<script>
+    $(document).ready(function() {
+        $('#downloadButton').click(function() {
+            // AJAX 요청 보내기
+            $.ajax({
+                type: 'POST', // 또는 'GET', 'PUT' 등 HTTP 메서드 선택
+                url: '/generatePdf', // 서버의 엔드포인트 URL 설정
+                success: function(response) {
+                        console.log("서버에 전송성공");
+                    // 서버에서 응답을 성공적으로 받았을 때 실행할 코드
+                    // 예: PDF 다운로드 링크 생성 또는 표시
+                },
+                error: function(error) {
+                console.log("서버에 전송 실패");
+                    // 요청 중에 오류가 발생했을 때 실행할 코드
+                }
+            });
+        });
+    });
+</script>
+
+
 <script>
     var btn1 = $(".car-img1-btn");
     var btn2 = $(".car-img2-btn");
