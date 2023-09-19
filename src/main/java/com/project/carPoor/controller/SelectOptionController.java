@@ -33,7 +33,7 @@ public class SelectOptionController {
 
 
 
-
+        selectOption=
         carService.create(selectOption.getInColorId(),
                 selectOption.getOptionId(),selectOption.getOutColorId(),
                 selectOption.getWholePrice(),selectOption.getOutImgUrl(),
@@ -47,9 +47,10 @@ public class SelectOptionController {
 
         System.out.println("바로 견적서 보여주기 파트");
 
-        model.addAttribute("selectTrue", true);
+        System.out.println(selectOption.getId());
 
-       return "redirect:/car/color#section3";
+       Long id= selectOption.getId();
+       return "redirect:/car/myPageDetail/"+id;
     }
 
 

@@ -136,10 +136,10 @@
                     </div>
 
                     <div class="btn-container">
-                        <button>이메일 발송 </button>
+                        <button ><a href="sendEmail">이메일 발송</a> </button>
                         <button>공유하기</button>
                         <button>저장하기</button>
-                        <button onclick="save" id="downloadButton">pdf 저장</button>
+                        <button onclick="save()" id="downloadButton">pdf 저장</button>
 
                     </div>
 
@@ -452,41 +452,95 @@
 
 
 
-
-
-
-    function saveAsPDF() {
+   function save(){
        html2canvas(document.querySelector("#capture")).then(canvas => {
-     // base64 url 로 변환
-     var imgData = canvas.toDataURL('image/jpeg');
+         // base64 url 로 변환
+         var imgData = canvas.toDataURL('image/jpeg');
 
-     var imgWidth = 210; // 이미지 가로 길이(mm) A4 기준
-     var pageHeight = imgWidth * 1.414; // 출력 페이지 세로 길이 계산 A4 기준
-     var imgHeight = canvas.height * imgWidth / canvas.width;
-     var heightLeft = imgHeight;
-     var margin = 20;
+         var imgWidth = 210; // 이미지 가로 길이(mm) A4 기준
+         var pageHeight = imgWidth * 1.414; // 출력 페이지 세로 길이 계산 A4 기준
+         var imgHeight = canvas.height * imgWidth / canvas.width;
+         var heightLeft = imgHeight;
+         var margin = 0;
 
-     var doc = new jsPDF('p', 'mm', 'a4');
-     var position = 0;
+         var doc = new jsPDF('p', 'mm', 'a4');
 
-     // 첫 페이지 출력
-     doc.addImage(imgData, 'jpeg', margin, position, imgWidth, imgHeight);
-     heightLeft -= pageHeight;
+         var position = 0;
 
-     // 한 페이지 이상일 경우 루프 돌면서 출력
-     while (heightLeft >= 20) {
-       position = heightLeft - imgHeight;
-       doc.addPage();
-       doc.addImage(imgData, 'jpeg', margin, position, imgWidth, imgHeight);
-       heightLeft -= pageHeight;
-     }
+         // 첫 페이지 출력
+         doc.addImage(imgData, 'jpeg', margin, position, imgWidth, imgHeight);
+         heightLeft -= pageHeight;
 
-     // 파일 저장
+         // 한 페이지 이상일 경우 루프 돌면서 출력
+         while (heightLeft >= 20) {
+           position = heightLeft - imgHeight;
+           doc.addPage();
+           doc.addImage(imgData, 'jpeg', margin, position, imgWidth, imgHeight);
+           heightLeft -= pageHeight;
+         }
 
-     doc.save('sample.pdf');
+
+
+         // 파일 저장
+            doc.save('sample.pdf');
+       });
+
+
+       };
+
+
+
+
+
+
+
+        function getBase64Image(url, callback) {
+  var img = new Image();
+  img.crossOrigin = "Anonymous";
+  img.onload = function() {
+    var canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    var dataURL = canvas.toDataURL('image/jpeg');
+    callback(dataURL);
+  };
+  img.src = url;
+}
+
+
+<!--       function getBase64Image(imgUrl, callback) {-->
+<!--       var img = new Image();-->
+
+<!--       // CORS 문제를 해결하기 위한 설정 (서버에서도 해당 도메인을 허용해야 함)-->
+<!--       img.setAttribute("crossOrigin", "anonymous");-->
+
+<!--       img.onload = function() {-->
+<!--           var canvas = document.createElement("canvas");-->
+<!--           canvas.width = this.width;-->
+<!--           canvas.height = this.height;-->
+
+<!--           var ctx = canvas.getContext("2d");-->
+<!--           ctx.drawImage(this, 0, 0);-->
+
+<!--           var dataURL = canvas.toDataURL("image/png");-->
+<!--           callback(dataURL);-->
+<!--       };-->
+
+<!--       img.src = imgUrl;-->
+<!--   }-->
+
+
+   getBase64Image("https://example.com/my-image.jpg", function(dataUri) {
+       var doc = new jsPDF('p', 'mm', 'a4');
+       doc.addImage(dataUri, 'JPEG', 15, 40, 180, 160);
+       doc.save('sample-file.pdf');
    });
 
-    }
+
+
+
 
 
 
