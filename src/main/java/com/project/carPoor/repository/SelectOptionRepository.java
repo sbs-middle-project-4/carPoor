@@ -12,11 +12,12 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 
 //@Transactional
 @Repository
-public class SelectOptionRepository  {
+public class SelectOptionRepository {
 
     private final JPAQueryFactory query;
     private final EntityManager em;
@@ -92,10 +93,6 @@ public class SelectOptionRepository  {
                 .getResultList();
 
     }
-
-
-
-
 
 
 

@@ -17,14 +17,6 @@ loopBottom: true,
 //첫번째 페이지 스크롤하면 마지막페이지로 이동
 loopTop: true,
 
-  afterLoad: function(origin, destination, direction) {
-      // Change tooltip colors based on the active section
-      if (destination.anchor === "section1") {
-        document.querySelector("#fp-nav ul li a span").style.color = "white";
-      } else if (destination.anchor === "section2" || destination.anchor === "section3") {
-        document.querySelector(`#fp-nav ul li[data-tooltip="${destination.anchor}"] a span`).style.color = "black";
-      }
-    }
 });
 
 

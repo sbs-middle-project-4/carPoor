@@ -1,10 +1,3 @@
-DROP TABLE carDetail;
-
-CREATE TABLE carDetail
-( id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-`name` CHAR(50) NOT NULL,
-`btnUrl` TEXT NOT NULL,
-`imgUrl` TEXT NOT NULL );
 
  INSERT INTO carDetail
  SET `name` = '얼씨 브래스 메탈릭 매트',

@@ -23,6 +23,7 @@ public class SelectOptionController {
     private  List<SelectOption> selectOptions;
     private  Member member;
     private final MemberService memberService;
+
     @PostMapping("/car/color")
     public String result(Model model, SelectForm selectForm, @Valid SelectOption selectOption,
                          Principal principal) {
@@ -31,13 +32,10 @@ public class SelectOptionController {
         Member member = memberService.getMemberByLoginId(principal.getName());
 
 
-
-
-
-        carService.create(selectOption.getInColorId(),
-                selectOption.getOptionId(),selectOption.getOutColorId(),
-                selectOption.getWholePrice(),selectOption.getOutImgUrl(),
-                selectOption.getInImgUrl(),member.getId());
+        SelectOption selectOption1 = carService.create(selectOption.getInColorId(),
+                selectOption.getOptionId(), selectOption.getOutColorId(),
+                selectOption.getWholePrice(), selectOption.getOutImgUrl(),
+                selectOption.getInImgUrl(), member.getId());
         System.out.println("차 옵션 만드는거 2차 실행부분");
 
 
@@ -49,7 +47,7 @@ public class SelectOptionController {
 
         model.addAttribute("selectTrue", true);
 
-       return "redirect:/car/color#section3";
+        return "redirect:/car/myPageDetail/" + selectOption1.getId();
     }
 
 

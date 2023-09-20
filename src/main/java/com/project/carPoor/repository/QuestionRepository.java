@@ -9,4 +9,5 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     List<Question> findByAuthorId(Long authorId);
 
     List<Question> findByIsPublicTrue();
+
 }

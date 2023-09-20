@@ -7,6 +7,7 @@ import com.project.carPoor.service.CarService;
 import com.project.carPoor.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -63,6 +64,7 @@ public class CarController {
 
 
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/color")
     public String getColor(Model model) {
 
@@ -216,6 +218,12 @@ public class CarController {
 
 
         return "redirect:/car/myPage";
+    }
+
+    @GetMapping("/detail/santafe")
+    public String showCarDetail() {
+
+        return "/carDetail";
     }
 
 

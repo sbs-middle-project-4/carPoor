@@ -16,6 +16,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css"/>
 
 
 
@@ -30,13 +32,48 @@
 <div id="capture" style="padding: 10px;">
 
 
-<body>
+<body class="overflow-x-hidden">
 
-<div class="top-bar-section">
-    <div class="top-bar-container">
+<div class="navbar bg-base-100 w-[1920px] h-[100px] flex justify-between px-32 bg-white text-black font-bold ">
+    <div class="navbar-start">
+        <a href="#" class="h-[100px] "
+        ><img
+                src="https://i.postimg.cc/ydv1Q2Wt/car-poor-logo-img-black.png"
+                alt=""
+                class="w-full h-full"
+        /></a>
     </div>
+    <div class="navbar-center hidden lg:flex ">
+        <ul class="menu menu-horizontal px-1 text-xl">
+            <li><a>모델</a></li>
+            <li><a>이벤트</a></li>
+            <li><a>디지털/고객지원</a></li>
+            <li><a>브랜드</a></li>
+        </ul>
+
+    </div>
+    <div class="navbar-end">
+        <ul class="menu menu-horizontal px-1">
+            <li>
+                <details>
+                    <summary class="w-[80px]">
+                        <img src="https://i.postimg.cc/1RHr5RT4/free-icon-user.png" class="w-full h-full"  alt="">
+                    </summary>
+                    <ul class="p-2 bg-base-100">
+                        <li class="w-[120px]"><a class="nav-link text-base" sec:authorize="isAnonymous()" th:href="@{/member/sign}">로그인</a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a></li>
+                        <li class="w-[120px]">
+                            <a class="nav-link text-base" sec:authorize="isAuthenticated()" th:href="@{/member/showMemberInfo}">my page</a></li>
+                    </ul>
+                </details>
+            </li>
+        </ul>
+
+
+    </div>
+
 </div>
-<h1>견적 상세 페이지</h1>
+
 
 <div class="car-section">
     <div class="car-container " th:each="selectOption, s : ${selectOption}">
@@ -147,6 +184,25 @@
             </div>
 
 
+<footer class=" footer footer-center p-10 text-base-content rounded mt-24">
+    <nav class="grid grid-flow-col gap-4 text-base font-bold">
+        <a class="link link-hover">About us</a>
+        <a class="link link-hover">Contact</a>
+        <a class="link link-hover">Jobs</a>
+        <a class="link link-hover">Press kit</a>
+    </nav>
+    <nav class="text-xs">
+        <div class="grid grid-flow-col gap-4">
+            <p>(주)영규 | BIRTHDAY 1997-03-17 [happy birth day] | OWNER 영규 | 대전광역시 대덕구 중리동</p>
+        </div>
+        <div class="grid grid-flow-col gap-4">
+            <p>TEL 010-2282-3232 | EMAIL alsdudrb123@gmail.com | ONLINE PERMIT TO 대전 대덕구 | 영규(주)</p>
+        </div>
+    </nav>
+    <aside>
+        <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+    </aside>
+</footer>
 
 
 </body>
