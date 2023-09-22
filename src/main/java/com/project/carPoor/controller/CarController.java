@@ -156,10 +156,20 @@ public class CarController {
             System.out.println(carDetail1.getImgUrl());
         }
 
+        if(selectOptions.size()==0){
+
+            System.out.println("값없음");
+            model.addAttribute("selectOption", null);
+        }
+        else {
+            System.out.println("값있음");
+            model.addAttribute("selectOption", selectOptions);
+        }
+
+
         model.addAttribute("carOption", carOption);
 
 
-        model.addAttribute("selectOption", selectOptions);
         model.addAttribute("carDetail", carDetail);
 
 
