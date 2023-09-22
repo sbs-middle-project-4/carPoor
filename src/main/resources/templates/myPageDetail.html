@@ -176,7 +176,7 @@
                         <button>이메일 발송 </button>
                         <button>공유하기</button>
                         <button>저장하기</button>
-                        <button onclick="save" id="downloadButton">pdf 저장</button>
+                        <button onclick="save()" id="downloadButton">pdf 저장</button>
 
                     </div>
 
@@ -207,6 +207,54 @@
 
 </body>
 </div>
+
+
+<script >
+
+
+    // 버튼 클릭 시 호출되는 함수
+ document.getElementById("downloadButton").addEventListener("click", function() {
+     // 동적 HTML 생성 및 서버로 전송 혹은 요청 로직 추가
+     console.log("pdf  함수 실행");
+var dynamicHtml = "<h1>ddd</h1>";
+generatePdfFromHtml(dynamicHtml);
+ });
+
+ // PDF 생성 함수
+ function generatePdfFromHtml(html) {
+     // 서버로 HTML을 전송하거나, 서버에서 동적 HTML 생성 요청을 보낼 수 있습니다.
+     // 서버에서 Flying Saucer PDF 라이브러리를 사용하여 PDF를 생성합니다.
+     // 그리고 생성된 PDF를 클라이언트로 반환하거나 다운로드 링크를 제공합니다.
+     // 이 부분은 서버 측 로직으로 처리되어야 합니다.
+
+       fetch('/pdf', {
+        method: 'POST',
+        body: JSON.stringify({ dynamicHtml: html }), // JSON 형태로 HTML 전송
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            // 서버로부터 PDF를 받아옵니다.
+            return response.blob();
+        } else {
+            throw new Error('PDF 생성 실패');
+        }
+    })
+    .then(blob => {
+        // PDF를 처리하거나 다운로드 링크를 제공합니다.
+        const pdfUrl = URL.createObjectURL(blob);
+        window.open(pdfUrl, '_blank');
+    })
+    .catch(error => {
+        console.error(error);
+        // 오류 처리 로직 추가
+    });
+ }
+
+</script>
+
 <script>
     var btn1 = $(".car-img1-btn");
     var btn2 = $(".car-img2-btn");
@@ -485,40 +533,65 @@
 
 
 
+    function save(){
+         html2canvas(document.querySelector("#capture")).then(canvas => {
+           // base64 url 로 변환
+           var imgData = canvas.toDataURL('image/jpeg');
+
+           var imgWidth = 210; // 이미지 가로 길이(mm) A4 기준
+           var pageHeight = imgWidth * 1.414; // 출력 페이지 세로 길이 계산 A4 기준
+           var imgHeight = canvas.height * imgWidth / canvas.width;
+           var heightLeft = imgHeight;
+           var margin = 0;
+
+           var doc = new jsPDF('p', 'mm', 'a4');
+
+           var position = 0;
+
+           // 첫 페이지 출력
+           doc.addImage(imgData, 'jpeg', margin, position, imgWidth, imgHeight);
+           heightLeft -= pageHeight;
+
+           // 한 페이지 이상일 경우 루프 돌면서 출력
+           while (heightLeft >= 20) {
+             position = heightLeft - imgHeight;
+             doc.addPage();
+             doc.addImage(imgData, 'jpeg', margin, position, imgWidth, imgHeight);
+             heightLeft -= pageHeight;
+           }
 
 
-    function saveAsPDF() {
-       html2canvas(document.querySelector("#capture")).then(canvas => {
-     // base64 url 로 변환
-     var imgData = canvas.toDataURL('image/jpeg');
 
-     var imgWidth = 210; // 이미지 가로 길이(mm) A4 기준
-     var pageHeight = imgWidth * 1.414; // 출력 페이지 세로 길이 계산 A4 기준
-     var imgHeight = canvas.height * imgWidth / canvas.width;
-     var heightLeft = imgHeight;
-     var margin = 20;
+           // 파일 저장
+              doc.save('sample.pdf');
+         });
 
-     var doc = new jsPDF('p', 'mm', 'a4');
-     var position = 0;
 
-     // 첫 페이지 출력
-     doc.addImage(imgData, 'jpeg', margin, position, imgWidth, imgHeight);
-     heightLeft -= pageHeight;
+         };
 
-     // 한 페이지 이상일 경우 루프 돌면서 출력
-     while (heightLeft >= 20) {
-       position = heightLeft - imgHeight;
-       doc.addPage();
-       doc.addImage(imgData, 'jpeg', margin, position, imgWidth, imgHeight);
-       heightLeft -= pageHeight;
-     }
 
-     // 파일 저장
+       function getBase64Image(imgUrl, callback) {
+       var img = new Image();
 
-     doc.save('sample.pdf');
-   });
+       // CORS 문제를 해결하기 위한 설정 (서버에서도 해당 도메인을 허용해야 함)
+       img.setAttribute("crossOrigin", "anonymous");
 
-    }
+       img.onload = function() {
+           var canvas = document.createElement("canvas");
+           canvas.width = this.width;
+           canvas.height = this.height;
+
+           var ctx = canvas.getContext("2d");
+           ctx.drawImage(this, 0, 0);
+
+           var dataURL = canvas.toDataURL("image/png");
+           callback(dataURL);
+       };
+
+       img.src = imgUrl;
+   }
+
+
 
 
 
