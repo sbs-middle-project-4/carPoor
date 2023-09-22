@@ -51,7 +51,7 @@
 
     </div>
 </header>
-<body class="flex flex-col justify-center items-center" th:attr="data-member-id=${member.id}">
+<body class="flex flex-col justify-center overflow-x-hidden items-center" th:attr="data-member-id=${member.id}">
 <div class="container2 flex justify-start    pt-5 w-[80%] h-[65vh] ">
     <div class="box1    flex flex-col items-center w-64 h-full mr-5 ml-28" >
 
@@ -113,24 +113,25 @@
 
         </div>
 
-        <div class="middle6 card bg-gray-100 text-black text-xl pt-5 w-[80%] h-[450px]">
+<!--        <div class="middle6 card bg-gray-100 text-black text-xl pt-5 w-[80%] h-[450px]">-->
 
-            <div class="overflow-x-auto question-list-vue-app">
+            <div class="overflow-x-auto question-list-vue-app w-[80%] h-[450px]">
                 <table class="table">
                     <!-- head -->
-                    <thead>
-                    <tr>
-                        <th class=" w-12"></th>
-                        <th class=" text-start w-auto">제목</th>
+                    <thead class=" bg-gray-100">
+                    <tr class="border-none">
+                        <th class="rounded-l-xl w-12"></th>
+                        <th class=" text-center w-auto">제목</th>
                         <th class=" text-center w-28">답변 상태</th>
-                        <th class=" text-center w-36">질문자</th>
+                        <th class="rounded-r-xl text-center w-36">질문자</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tr class="h-5 border-none"></tr>
 
-                    <tr th:each="question, stat : ${questions}">
+                    <tbody class="bg-white border-gray-300 shadow-md ">
+                    <tr th:each="question, stat : ${questions}" class="border-none">
                         <th th:text="${stat.index + 1}"></th>
-                        <td class="hover:underline">
+                        <td class="hover:underline text-center">
                             <a th:href="@{'/question/detail/' + ${question.id}}" th:text="${question.subject}"></a>
                         </td>
                         <td class="text-center" th:text="${question.answerStatus}"></td>
@@ -145,12 +146,11 @@
                             <a href="/question/create" class="btn btn-outline bg-white">1:1 질문하기</a>
                         </td>
                     </tr>
-
-
                     </tbody>
+
                 </table>
             </div>
-        </div>
+<!--        </div>-->
 
     </div>
 </div>

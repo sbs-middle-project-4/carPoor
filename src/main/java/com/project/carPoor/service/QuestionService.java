@@ -46,7 +46,7 @@ public class QuestionService {
 
     public List<Question> findIsPublicQuestion() {
 
-        return this.questionRepository.findByIsPublicTrue();
+        return this.questionRepository.findByIsPublicTrueOrderByIdDesc();
     }
 
     public List<Question> findAll() {

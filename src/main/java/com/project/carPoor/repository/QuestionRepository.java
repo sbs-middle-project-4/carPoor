@@ -8,6 +8,6 @@ import java.util.List;
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     List<Question> findByAuthorId(Long authorId);
 
-    List<Question> findByIsPublicTrue();
+    List<Question> findByIsPublicTrueOrderByIdDesc();
 
 }

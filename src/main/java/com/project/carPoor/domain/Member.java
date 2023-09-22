@@ -4,6 +4,7 @@ package com.project.carPoor.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
 
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class Member {
     private boolean joinStatus;
 
     @OneToMany(mappedBy = "author")
+    @OrderBy("id DESC")
     private List<Question> question;
 
 }

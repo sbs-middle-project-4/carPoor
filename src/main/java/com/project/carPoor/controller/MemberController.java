@@ -207,7 +207,7 @@ public class MemberController {
     public String showQuestionList(Principal principal, Model model) {
 
         Member member = this.memberService.getMemberByLoginId(principal.getName());
-        List<Question> questions = this.questionService.findQuestionsByAuthorId(member.getId());
+        List<Question> questions = member.getQuestion();
 
         model.addAttribute("member", member);
         model.addAttribute("questions", questions);

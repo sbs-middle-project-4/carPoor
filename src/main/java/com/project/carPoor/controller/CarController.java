@@ -179,25 +179,28 @@ public class CarController {
         System.out.println(selectOptions.get(0).getWholePrice());
 
 
-        List<Integer> colorIds = new ArrayList<>();
+        List<Integer> colorIds1 = new ArrayList<>();
+        List<Integer> colorIds2 = new ArrayList<>();
         List<Integer> optionIds = carService.getSelectOptionIdsById(selectOptionId);
 
+        colorIds1.add(selectOptions.get(0).getOutColorId());
+        colorIds2.add(selectOptions.get(0).getInColorId());
 
 
 
+//        for (SelectOption selectOption : selectOptions) {
+//            // Assuming getColorId() is the method to retrieve the colorId from SelectOption
+//            int colorId = selectOption.getOutColorId();
+//            colorIds.add(colorId);
+//        }
 
-        for (SelectOption selectOption : selectOptions) {
-            // Assuming getColorId() is the method to retrieve the colorId from SelectOption
-            int colorId = selectOption.getOutColorId();
-            colorIds.add(colorId);
-        }
+
 
         List<CarOption> carOption =carService.getCarOptionById(optionIds);
-        List<CarDetail> carDetail =carService.getCarDetailByColorId(colorIds);
-        List<CarDetail2> carDetail2 =carService.getCarDetail2ByColorId(colorIds);
-        System.out.println(carOption);
+        List<CarDetail> carDetail =carService.getCarDetailByColorId(colorIds1);
+        List<CarDetail2> carDetail2 =carService.getCarDetail2ByColorId(colorIds2);
 
-        System.out.println(carDetail2.get(0).getBtnUrl());
+        System.out.println(carDetail2);
 
         model.addAttribute("selectOption", selectOptions);
         model.addAttribute("carDetail", carDetail);
