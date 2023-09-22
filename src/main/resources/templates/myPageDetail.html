@@ -19,7 +19,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css"/>
 
-
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css"/>
 
     <link
             type="text/css"
@@ -29,7 +30,7 @@
     />
 </head>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-<div id="capture" style="padding: 10px;">
+
 
 
 <body class="overflow-x-hidden">
@@ -74,7 +75,8 @@
 
 </div>
 
-
+<!-- pdf 캡쳐 시작-->
+<div id="capture" style="padding: 10px;">
 <div class="car-section">
     <div class="car-container " th:each="selectOption, s : ${selectOption}">
         <div><h1>나의 디올 뉴 산타페가 완성 되었습니다.</h1></div>
@@ -87,8 +89,8 @@
         <div><span> * 상기 이미지는 내/외장 색상 선택을 돕기 위한 참고용으로 제공되고 있습니다.</span></div>
         <br>
         <div>
-            <button class="car-img1-btn">내부 </button>
-            <button class="car-img2-btn">외부 </button>
+            <button class="car-img1-btn btn btn-neutral ">내부 </button>
+            <button class="car-img2-btn btn btn-neutral ">외부 </button>
         </div>
     </div>
 </div>
@@ -167,22 +169,24 @@
                         <div class="wholePrice1"></div>
                         <div style="display:none;" class="wholePrice2" th:text="${selectOption.wholePrice}"></div>
                     </div>
+                    <br>
                     <div>
                         <div>견적 기준일 &nbsp &nbsp</div>
                         <div th:text="${selectOption.createDate}"> </div>
                     </div>
-
+                    <br>
                     <div class="btn-container">
-                        <button>이메일 발송 </button>
-                        <button>공유하기</button>
-                        <button>저장하기</button>
-                        <button onclick="save()" id="downloadButton">pdf 저장</button>
+                        <button class="btn btn-neutral p-1">이메일 발송 </button>
+                        <button class="btn btn-neutral p-1">공유하기</button>
+                        <button class="btn btn-neutral p-1">저장하기</button>
+                        <button  class=" btn btn-neutral p-1" onclick="save()" id="downloadButton">pdf 저장</button>
 
                     </div>
 
                 </div>
             </div>
-
+</div>
+<!--pdf 캡쳐 끝-->
 
 <footer class=" footer footer-center p-10 text-base-content rounded mt-24">
     <nav class="grid grid-flow-col gap-4 text-base font-bold">
@@ -206,7 +210,7 @@
 
 
 </body>
-</div>
+
 
 
 <script >
@@ -520,7 +524,7 @@ generatePdfFromHtml(dynamicHtml);
 
     .btn-container>button{
           margin-left:30px;
-          width: 100px;
+          width: 150px;
     }
 
 
