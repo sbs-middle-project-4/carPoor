@@ -112,7 +112,11 @@
 
 <!--      견적 db 들어갈 공간 -->
         <div   style="" class="main-box2-body">
-            <div class="main-box2-body-container" th:each="selectOption, s : ${selectOption}">
+            <div style="text-align:center ;   margin:100px 0;" th:if="${selectOption == null}" >
+                <!-- Add your additional tag or element here when selectOption is empty -->
+                <div style="font-size:30px; ">등록된 차가 없습니다.</div>
+            </div>
+            <div class="main-box2-body-container"  th:if="${selectOption != null}" th:each="selectOption, s : ${selectOption}">
 
                 <div class="main-box2-body-container-item1">
 
