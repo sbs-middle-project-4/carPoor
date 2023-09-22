@@ -24,7 +24,19 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
             if (authorities.stream().anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"))) {
                 setDefaultTargetUrl("/member/admin");
             } else {
-                setDefaultTargetUrl("/member/showMemberInfo");
+                // 세션에서 PREVIOUS_URL 값을 가져옵니다.
+                String previousUrl = (String) request.getSession().getAttribute("PREVIOUS_URL");
+
+                if (previousUrl != null && !previousUrl.isBlank()) {
+                    // 가져온 URL로 리다이렉트합니다.
+                    getRedirectStrategy().sendRedirect(request, response, previousUrl);
+                    // URL 사용 후 세션에서 삭제합니다.
+                    request.getSession().removeAttribute("PREVIOUS_URL");
+                    return; // 리다이렉트 후 추가 동작을 중단합니다.
+                } else {
+                    // PREVIOUS_URL 값이 없는 경우 기본 URL로 설정합니다.
+                    setDefaultTargetUrl("/member/showMemberInfo");
+                }
             }
         }
 

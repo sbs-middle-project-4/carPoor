@@ -46,11 +46,30 @@
                 </a>
                 <!-- 2 -->
                 <!-- 로그인 -->
-                <a href="#"
+                <a href="/member/sign" id="login"
                 ><img
                         src="https://i.postimg.cc/1RHr5RT4/free-icon-user.png"
                         alt=""
                 /></a>
+
+
+<!--                <script>-->
+<!--                    document.querySelector('#login').addEventListener('click', function(event) {-->
+<!--                        event.preventDefault(); // 기본 동작(즉, 페이지 이동)을 중단합니다.-->
+
+<!--                        fetch('/savePreviousURL') // 서블릿을 호출하여 현재 URL을 세션에 저장합니다.-->
+<!--                        .then(response => {-->
+<!--                            if(response.ok) {-->
+<!--                                // 성공적으로 URL이 저장되었으면 기본 동작(즉, 페이지 이동)을 계속합니다.-->
+<!--                                window.location.href = event.target.getAttribute('href');-->
+<!--                            } else {-->
+<!--                                console.error('Failed to save the URL.');-->
+<!--                            }-->
+<!--                        })-->
+<!--                        .catch(error => console.error('Error:', error));-->
+<!--                    });-->
+<!--                </script>-->
+
             </div>
 
             <!-- 전체메뉴바 -->

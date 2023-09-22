@@ -2,6 +2,9 @@ server:
   port: 8092
 
 spring:
+  output:
+    ansi:
+      enabled: always
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/carpoor?useUnicode=true&serverTimezone=Asia/Seoul
@@ -15,6 +18,11 @@ spring:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        format_sql: true
+        highlight_sql: true
+        use_sql_comments: true
 
   mail:
     host: smtp.gmail.com
@@ -28,3 +36,9 @@ spring:
           timeout: 5000
           starttls:
             enable: true
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.hibernate.orm.jdbc.extract: TRACE
+    org.springframework.transaction.interceptor: TRACE

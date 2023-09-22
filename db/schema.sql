@@ -1,21 +1,3 @@
-CREATE DATABASE carpoor;
-
-DROP USER sbs;
-CREATE USER sbs@`%` IDENTIFIED BY '';
-GRANT ALL PRIVILEGES ON *.* TO sbs@`%`;
-ALTER USER 'sbs'@'%' IDENTIFIED WITH mysql_native_password BY '';
-
-USE carpoor;
-
-CREATE TABLE car (
-id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-`brand` CHAR(20) NOT NULL,
-`name` CHAR(20) NOT NULL,
-size CHAR(20) NOT NULL,
-`engine` CHAR(20) NOT NULL,
-displacement INT UNSIGNED,
-imgUrl TEXT NOT NULL
-);
 
 INSERT INTO car
 SET `brand` = '기아',

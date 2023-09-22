@@ -25,6 +25,7 @@ public class CarController {
     private final CarService carService;
 
     private List<Car> cars; // 검색으로 뽑힌 자동차가 저장될 곳.
+
     @GetMapping("/list/hyundai")
     public String showListHyundai() {
 

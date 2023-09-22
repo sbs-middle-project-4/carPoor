@@ -3,6 +3,7 @@ package com.project.carPoor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -22,6 +24,10 @@ public class SecurityConfig {
 
     @Autowired
     private CustomAuthenticationSuccessHandler successHandler;
+
+    @Autowired
+    private AccessDeniedHandler customAccessDeniedHandler; // 여기에 추가
+
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -34,7 +40,13 @@ public class SecurityConfig {
                         .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                         .logoutSuccessUrl("/member/sign")
                         .invalidateHttpSession(true))
-        ;
+                .exceptionHandling((exceptionHandling) -> {
+                    exceptionHandling
+                            .accessDeniedHandler(customAccessDeniedHandler) // AccessDeniedHandler 설정
+                            .authenticationEntryPoint((request, response, authException) -> {
+                                customAccessDeniedHandler.handle(request, response, new AccessDeniedException("Access Denied"));
+                            }); // 인증되지 않은 사용자에 대한 핸들러 설정
+                });
 
         return http.build();
     }
@@ -48,7 +60,5 @@ public class SecurityConfig {
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     } // 사용자 인증
-
-
 
 }
