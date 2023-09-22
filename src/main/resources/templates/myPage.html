@@ -22,6 +22,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css"/>
 
+    <script src="/js/money.js" defer></script>
 
     <link
             type="text/css"
@@ -108,7 +109,8 @@
                     </a>
                 </div>
                 <div class="main-box2-body-container-item2   myPage-price1"  ></div>
-                <div class="main-box2-body-container-item2 myPage-price2" style="display:none;"  th:text="${selectOption.wholePrice}" ></div>                <div class="main-box2-body-container-item3" th:text="${selectOption.createDate}" ></div>
+                <div class="main-box2-body-container-item2 myPage-price2" style="display:none;"  th:text="${selectOption.wholePrice}" ></div>
+                <div class="main-box2-body-container-item3" th:text="${selectOption.createDate}" ></div>
                 <div class="main-box2-body-container-item4" >
                     <input class="main-box2-body-container-checkbox checkbox-xs" name="id" th:value="${selectOption.id}" type="checkbox">
                     </div>
