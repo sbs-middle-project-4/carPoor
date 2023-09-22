@@ -85,8 +85,19 @@
 
 <div class="main-section  ">
     <div class="main-box1">
+        <div class="select-btn-section bg-indigo-500" style="display:none;">
+            <div class="m-5">정말 삭제 하시겠습니까?</div>
+            <div class="select-btn-container">
+                <div>
+                    <button class="select-yes-btn btn-submit ring-offset-2 ring-2" type="submit" >확인</button>
+                </div>
+                <div>
+                    <button class="select-no-btn ring-offset-2 ring-2">취소</button>
+                </div>
+            </div>
 
-        <div  style=" margin-right:20px; "><button   type="submit" class = "delButton checkbox-xs">삭제</button></div>
+        </div>
+        <div  style=" margin-right:20px; "><button   class = "btn-check delButton checkbox-xs">삭제</button></div>
     </div>
     <div class="main-box2">
        <div class="main-box2-title "  data-theme="light">
@@ -183,11 +194,39 @@
 
         }
 
-        .main-sec
-        tion > div{
+        .main-section > div{
         margin: 50px 0 ;
 
         }
+
+
+            .select-btn-section {
+                display:none;
+                position:absolute;
+                top:50%;
+                left:50%;
+                transform:translate(-50%,-50%);
+                width:350px;
+                height:150px;
+               color:white;
+                font-size:20px;
+
+
+            }
+
+
+
+ .select-btn-container {
+                display:flex;
+                margin-top:20px;
+                 justify-content: space-around;
+
+                     border-radius: 5px;
+
+            }
+
+
+
 
         .main-box1 {
      justify-content: space-between;
@@ -331,7 +370,7 @@
 
 <script>
     var allCheckBox = $(".allCheckBox");
-
+     var mainContainerCheckboxes = $(".main-box2-body-container-checkbox");
 
     allCheckBox.click(function(){
     if (allCheckBox.prop("checked")) {
@@ -343,7 +382,64 @@
     else {
     console.log("체크박스 해제 상태 ");
     $(".main-box2-body-container-checkbox").prop("checked",false);
+
     }
+
+
 });
+
+     mainContainerCheckboxes.click(function() {
+        // Check if all mainContainerCheckboxes are selected
+        var allSelected = true;
+        mainContainerCheckboxes.each(function() {
+            if (!$(this).prop("checked")) {
+                allSelected = false;
+                return false; // Exit the loop early if any checkbox is not selected
+            }
+        });
+
+        // Update the "모두 선택" checkbox based on the result
+        allCheckBox.prop("checked", allSelected);
+    });
+
+
+
+
+
+
+ function viewBtn() {
+        $(".select-btn-section").css("display", "block");
+    }
+
+
+    function closeBtn() {
+        $(".select-btn-section").css("display", "none");
+    }
+
+
+       $(".btn-check").click(function() {
+         viewBtn();
+         event.preventDefault();
+
+
+    });
+
+    $(".select-no-btn").click(function() {
+        closeBtn();
+          event.preventDefault();
+    });
+
+
+
+    if(  $(".main-box2-body-container-checkbox").prop("checked")){
+    allCheckBox.prop("checked",true);
+    }
+    else {
+    allCheckBox.prop("checked",false);
+    };
+
+
+
+
 
 </script>
